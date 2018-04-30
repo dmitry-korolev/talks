@@ -10,7 +10,7 @@ tmp/**
 node_modules/
 .sass-cache
 css/reveal.min.css
-js/reveal.min.js
+lib/js/reveal.min.js
 
 # Private
 rstate/**
