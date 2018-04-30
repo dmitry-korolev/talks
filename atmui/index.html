@@ -1,0 +1,62 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<base href="../" />
+
+		<title>State</title>
+
+		<link rel="stylesheet" href="lib/css/reveal.css">
+		<link rel="stylesheet" href="lib/css/theme/moon.css">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="plugin/prism/night.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			const link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'lib/css/print/pdf.css' : 'lib/css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section>
+					<h1>ИНТРО</h1>
+				</section>
+			</div>
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="lib/js/reveal.js"></script>
+
+		<script>
+			// More info about config & dependencies:
+			// - https://github.com/hakimel/reveal.js#configuration
+			// - https://github.com/hakimel/reveal.js#dependencies
+			Reveal.initialize({
+				controls: false,
+				controlsTutorial: false,
+				slideNumber: 'c/t',
+				history: true,
+				dependencies: [
+					{ src: 'plugin/markdown/marked.js' },
+					{ src: 'plugin/markdown/markdown.js' },
+					{ src: 'plugin/notes/notes.js', async: true },
+					{ src: 'plugin/prism/prism.js', async: true, callback: () => {
+						Array.from(document.querySelectorAll('pre code')).forEach(block => {
+							block.addEventListener('blur', (event) => {
+								Prism.highlightElement(block)
+							})
+						})
+					} }
+				]
+			})
+		</script>
+	</body>
+</html>
