@@ -12,8 +12,8 @@
 
 
 // Include theme-specific fonts
-@import url(../../lib/font/league-gothic/league-gothic.css);
-@import url(https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic);
+@import url(../../font/league-gothic/league-gothic.css);
+@import url(https://fonts.googleapis.com/css?family=Roboto+Condensed:400,400i,700,700i|Roboto+Mono:400,400i,700,700i|Roboto:400,400i,700,700i);
 
 /**
  * Solarized colors by Ethan Schoonover
@@ -49,8 +49,12 @@ $backgroundColor: $base03;
 $linkColor: $blue;
 $linkColorHover: lighten( $linkColor, 20% );
 $selectionBackgroundColor: $magenta;
+$mainFont: "Roboto", sans-serif;
+$headingFont: "Roboto Condensed", sans-serif;
 
-
+@mixin bodyBackground() {
+	@include radial-gradient( rgba(28,30,32,1), rgba(85,90,95,1) );
+}
 
 // Theme template ------------------------------
 @import "../template/theme";
