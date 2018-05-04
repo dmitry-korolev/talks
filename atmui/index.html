@@ -12,7 +12,7 @@
 		<link rel="stylesheet" href="lib/css/theme/moon.css">
 
 		<!-- Theme used for syntax highlighting of code -->
-		<link rel="stylesheet" href="plugin/prism/night.css">
+		<link rel="stylesheet" href="lib/plugins/prism/night.css">
 
 		<!-- Printing and PDF exports -->
 		<script>
@@ -357,10 +357,10 @@
                 transitionSpeed: 'fast',
               	postMessage: true,
 				dependencies: [
-					{ src: 'plugin/markdown/marked.js' },
-					{ src: 'plugin/markdown/markdown.js' },
-					{ src: 'plugin/notes/notes.js', async: true },
-					{ src: 'plugin/prism/prism.js', async: true, callback: () => {
+					{ src: 'lib/plugins/markdown/marked.js' },
+					{ src: 'lib/plugins/markdown/markdown.js' },
+					{ src: 'lib/plugins/notes/notes.js', async: true },
+					{ src: 'lib/plugins/prism/prism.js', async: true, callback: () => {
 						Array.from(document.querySelectorAll('pre code')).forEach(block => {
 							block.addEventListener('blur', () => {
 								Prism.highlightElement(block)
