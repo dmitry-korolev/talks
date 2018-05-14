@@ -363,9 +363,13 @@
     history: true,
     transitionSpeed: 'fast',
     postMessage: true,
+    showNotes: document.location.search.indexOf('showNotes=true') >= 0,
     dependencies: [
       { src: 'lib/plugins/markdown/marked.js' },
       { src: 'lib/plugins/markdown/markdown.js' },
+      { src: 'lib/plugins/dinasize/index.js', async: true, callback: () => {
+          dinasize()
+        } },
       { src: 'lib/plugins/notes/notes.js', async: true },
       { src: 'lib/plugins/prism/prism.js', async: true, callback: () => {
           Array.from(document.querySelectorAll('pre code')).forEach(block => {
