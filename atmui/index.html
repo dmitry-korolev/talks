@@ -27,8 +27,8 @@
 		<div class="reveal">
 			<div class="slides">
 				<section>
-					<h1>Через тернии к ATM</h1>
-					<p style="line-height: 0.8">
+					<h1>Через тернии к&nbsp;ATM</h1>
+					<p style="line-height: 0.7">
 						<small>Дима Королев, разработчик Tinkoff.ru</small><br />
 						<small>email: <a href="mailto:dima@korolev.dk">dima@korolev.dk</a></small><br />
 						<small>github: <a href="https://github.com/dmitry-korolev">/dmitry-korolev</a></small><br />
@@ -104,7 +104,7 @@
 					</aside>
 				</section>
 				<section>
-					<h1>🌈</h1>
+					<h1 class="emoji">🌈</h1>
 					<aside class="notes">
 						<p>Казалось бы, ну все прекрасно ведь, это не проект, а мечта, сиди да пили себе потихонечку.</p>
 						<p>И, забегая вперед, скажу, что в целом так и было бы, если бы в самом начале разработки не было совершено несколько глобальных ошибок.</p>
@@ -337,9 +337,8 @@
 					</aside>
 				</section>
 				<section>
-					<h1>Вопросы?</h1>
-					<a href="https://clck.ru/DJ5CY"><img src="/atmui/qrlink.svg" alt=""></a>
-					<p style="line-height: 0.8">
+					<a href="https://clck.ru/DJ5CY"><img style="height: 9em" src="/atmui/qrlink.svg" alt=""></a>
+					<p style="line-height: 0.7">
 						<small>Веб-версия доклада: <a href="https://clck.ru/DJ5CY">https://clck.ru/DJ5CY</a></small><br />
 						<small>email: <a href="mailto:dima@korolev.dk">dima@korolev.dk</a></small><br />
 						<small>github: <a href="https://github.com/dmitry-korolev">/dmitry-korolev</a></small><br />
@@ -366,7 +365,8 @@
 				dependencies: [
 					{ src: 'lib/plugins/markdown/marked.js' },
 					{ src: 'lib/plugins/markdown/markdown.js' },
-					{ src: 'lib/plugins/notes/notes.js', async: true },
+                    { src: 'lib/plugins/dinasize/index.js' },
+                    { src: 'lib/plugins/notes/notes.js', async: true },
 					{ src: 'lib/plugins/prism/prism.js', async: true, callback: () => {
 						Array.from(document.querySelectorAll('pre code')).forEach(block => {
 							block.addEventListener('blur', () => {

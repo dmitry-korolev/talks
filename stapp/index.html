@@ -1,0 +1,316 @@
+<!doctype html>
+<!--suppress HtmlFormInputWithoutLabel -->
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<base href="../" />
+
+		<title>Микрофронтенд</title>
+
+		<link rel="stylesheet" href="lib/css/reveal.css">
+		<link rel="stylesheet" href="lib/css/theme/moon.css">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="lib/plugins/prism/night.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			const link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'lib/css/print/pdf.css' : 'lib/css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+	</head>
+
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section>
+					<h1>Микрофронтенд</h1>
+					<p style="line-height: 0.7">
+						<small>Дима Королев, разработчик Tinkoff.ru</small><br />
+						<small>email: <a href="mailto:dima@korolev.dk">dima@korolev.dk</a></small><br />
+						<small>github: <a href="https://github.com/dmitry-korolev">/dmitry-korolev</a></small><br />
+						<small>telegram: <a href="https://t.me/dimakorolev">@dimakorolev</a></small>
+					</p>
+					<aside class="notes">
+						<p>Всем привет. Меня зовут Дима Королев, и я - разработчик в банке Тинькофф.</p>
+					</aside>
+				</section>
+
+                <section>
+                    <h1>Интро</h1>
+                    <aside class="notes">
+                        <p>Сегодня мы обсудим несколько крайне холиварных тем, холиварных, потому что вопросы архитектуры всегда холиварные.</p>
+                    </aside>
+                </section>
+
+				<section>
+					<h1>В чем главная особенность современного веба?</h1>
+				</section>
+
+				<section>
+					<h1>Фичи</h1>
+					<div style="height: 0">
+						<p class="fragment random">Фичи</p>
+						<p class="fragment random">Фичи</p>
+						<p class="fragment random">Фичи</p>
+						<p class="fragment random">Фичи</p>
+						<p class="fragment random">Фичи</p>
+						<p class="fragment random">Фичи</p>
+						<p class="fragment random">Фичи</p>
+						<p class="fragment random">Фичи</p>
+						<p class="fragment random">Фичи</p>
+						<p class="fragment random">Фичи</p>
+						<p class="fragment random">Фичи</p>
+						<p class="fragment random">Фичи</p>
+						<p class="fragment random">Фичи</p>
+						<p class="fragment random">Фичи</p>
+						<p class="fragment random">Фичи</p>
+						<p class="fragment random">Фичи</p>
+						<p class="fragment random">Фичи</p>
+						<p class="fragment random">Фичи</p>
+						<p class="fragment random">Фичи</p>
+						<p class="fragment random">Фичи</p>
+					</div>
+					<aside class="notes">
+						<p>
+							В том, что с каждым годом требования к веб-приложениям всё увеличиваются. Количество фич растет радикально. Выражение «толстый клиент» принимается как само собой разумеющееся и уже никого не удивляет.
+						</p>
+					</aside>
+				</section>
+
+				<section data-background-image="/stapp/images/itsok.jpg">
+					<aside class="notes">
+						<p>
+							И это нормально. Большие приложения на клиенте - это круто. Но, с другой стороны, это вызывает две глобальные проблемы.
+						</p>
+					</aside>
+				</section>
+
+				<section>
+					<h1>Раздувание</h1>
+					<aside class="notes">
+						<p>
+							Первая - раздувание кода. Бандлы по несколько сотен килобайт в сжатом виде, да? Далеко за пределами ходить не надо.
+						</p>
+					</aside>
+				</section>
+
+				<section data-background-image="/stapp/images/tinkoff-size.png" data-background-position="bottom left">
+					<aside class="notes">
+						<p>Заходим на главную tinkoff.ru - 350кб только на JS.</p>
+					</aside>
+				</section>
+
+				<section data-background-image="/stapp/images/payments-size.png" data-background-position="bottom left">
+					<aside class="notes">
+						<p> Заходим в, прости господи, раздел платежей - все 850 кб. Все это долго грузится, долго парсится, долго выполняется.</p>
+					</aside>
+				</section>
+
+				<section>
+					<h1>Сложность</h1>
+					Сюда докинуть картинку с графом зависимостей платежей
+					<aside class="notes">
+						<p>
+							Вторая проблема - растущая в геометрической прогрессии сложность. Чем больше функциональность у приложения, чем из большего количества функциональных блоков оно состоит - тем больше между ними связей, тем сложнее уследить за тем, что происходит, тем сложнее войти в проект.
+						</p>
+					</aside>
+				</section>
+
+				<section>
+					<h1>И это еще не&nbsp;всё!</h1>
+					<aside class="notes">
+						<p>Это не единственные проблемы, но, на мой взгляд, основные, и все прочие выливаются из этих двух. И если первую проблему худо-бедно научились решать, то со второй надо что-то делать, и срочно.</p>
+					</aside>
+				</section>
+
+				<section>
+					<h1>KO</h1>
+					<aside class="notes">
+						<p>Побуду немного капитаном очевидность и скажу то, что всем и так понятно.</p>
+					</aside>
+				</section>
+
+				<section>
+					<h1>Меньше&nbsp;=&nbsp;проще</h1>
+					<aside class="notes">
+						<p>Маленькие приложения проще разрабатывать и поддерживать.</p>
+					</aside>
+				</section>
+
+				<section>
+					<h1>Микрофронтенд</h1>
+					<aside class="notes">
+						<p>И вполне естественным кажется подход, уже опробованный, отработанный и принятый на вооружение в бекенде - это разделение приложений на несколько отдельных приложений. В бекенде это называется микросервисами.</p>
+					</aside>
+				</section>
+
+				<section>
+					<h1 style="text-decoration: line-through">Микросервисы</h1>
+					<aside class="notes">
+						<p>На фронте предпочительней использовать другие термины, такие как микрофронтенд, или микроприложения на фронте, или как угодно, но только не микросервисы, потому что к сервисам в том понимании, в котором это слово используется на беке, микроприложения на фронте не имеют никакого отношения.</p>
+					</aside>
+				</section>
+
+				<section data-background-image="/stapp/images/opentable.png">
+					<h1>2015</h1>
+
+					<aside class="notes">
+						<p>Вообще, тема с микрофронтендом не нова. Первые упоминания, первые попытки обосновать переход на микросервисный подход в архитектуре вебприложений появились еще примерно в 2015 году.</p>
+						<p><a href="http://tech.opentable.co.uk/blog/2015/02/09/dismantling-the-monolith-microsites-at-opentable/">Dismantling the monolith - Microsites at Opentable</a></p>
+					</aside>
+				</section>
+
+				<section data-background-image="/stapp/images/xebia.png">
+					<h1>2015</h1>
+					<aside class="notes">
+						<p><a href="http://blog.xebia.com/the-monolithic-frontend-in-the-microservices-architecture/">The monolithic frontend in the microservices architecture</a></p>
+					</aside>
+				</section>
+
+				<section data-background-image="/stapp/images/techradar.png">
+					<h1>2016</h1>
+
+					<aside class="notes">
+						<p>На техрадаре термин "микрофронтенд" появился в 2016 году, и в 2017-м перешел в статус Trial, подразумевающий, что подход еще требует уточнения, но в целом кажется вполне уместным и достойным внедрения.</p>
+						<p><a href="https://www.thoughtworks.com/radar/techniques/micro-frontends">Micro frontends</a></p>
+					</aside>
+				</section>
+
+				<section data-background-image="/stapp/images/now.png">
+					<h1>Сейчас</h1>
+					<aside class="notes">
+						<p>В результате о микроприложениях сейчас не говорит только ленивый. За последние года полтора не было ни одной более-менее крупной конференции, на которой не говорили бы о микрофронтенде.</p>
+						<ul>
+							<li><a href="https://engineering.hellofresh.com/front-end-microservices-at-hellofresh-23978a611b87">Front-end Microservices at HelloFresh</a></li>
+							<li><a href="https://micro-frontends.org/">Micro Frontends</a></li>
+							<li><a href="https://hackernoon.com/front-end-microservices-with-web-components-597759313393">Front-end microservices with Web Components</a></li>
+							<li><a href="https://medium.com/@tomsoderlund/micro-frontends-a-microservice-approach-to-front-end-web-development-f325ebdadc16">Micro frontends—a microservice approach to front-end web development</a></li>
+						</ul>
+					</aside>
+				</section>
+
+				<section data-background-image="/stapp/images/what-are-you.jpg">
+					<h1>Что ты такое?</h1>
+					<aside class="notes">
+						<p>
+							Так, собственно, что такое микрофронтенд?
+						</p>
+					</aside>
+				</section>
+
+				<section>
+					<h1>Разделяй и&nbsp;властвуй</h1>
+					<aside class="notes">
+						<p>В общем случае - это подход, предполагающий разделение одного большого приложения на множество маленьких.</p>
+						<p>Почему множество?</p>
+						<p>Потому что если твоё приложение делится на два или три, то тебе это не нужно.</p>
+					</aside>
+				</section>
+
+				<section>
+					<h1>А подробней?</h1>
+					<aside class="notes">
+						<p>А вот дальше начинаются нюансы. Под микрофронтендом понимаются порой совсем разные вещи.</p>
+						<p>И спектр вариантов довольно-таки широк.</p>
+					</aside>
+				</section>
+
+				<section data-background-image="/stapp/images/microservice.png">
+					<aside class="notes">
+						<p>Крайний случай - напрямую переносить подход микросервисов. Один или несколько роутов - одно приложение. Еще несколько - второе. Еще несколько - третье. Приложения полностью разделены, поддерживаются разными командами и практически никак не пересекаются.</p>
+					</aside>
+				</section>
+
+				<section data-background-image="/stapp/images/microservice2.png">
+					<aside class="notes">
+						<p>Понятное дело, что на фронте так не работает. Всё равно хочется доставлять как можно меньше кода до клиента, всё равно хочется выносить какую-то логику в общие модули, и в итоге эти приложения всё равно обрастают связями. До какой-то степени это можно держать под контролем, но решает ли такой подход глобальную проблему?</p>
+					</aside>
+				</section>
+
+				<section data-background-image="/stapp/images/payments.png"></section>
+				<section data-background-image="/stapp/images/payments-with-apps.png"></section>
+
+				<section>
+					<h1><code>view = f(state)</code></h1>
+				</section>
+
+				<section>
+					<a href="https://clck.ru/DKTSf"><img style="height: 9em" src="/stapp/qrcode.svg" alt=""></a>
+					<p style="line-height: 0.7">
+						<small>Веб-версия доклада: <a href="https://clck.ru/DKTSf">https://clck.ru/DKTSf</a></small><br />
+						<small>email: <a href="mailto:dima@korolev.dk">dima@korolev.dk</a></small><br />
+						<small>github: <a href="https://github.com/dmitry-korolev">/dmitry-korolev</a></small><br />
+						<small>telegram: <a href="https://t.me/dimakorolev">@dimakorolev</a></small>
+					</p>
+				</section>
+			</div>
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="lib/js/reveal.js"></script>
+
+		<script>
+			// More info about config & dependencies:
+			// - https://github.com/hakimel/reveal.js#configuration
+			// - https://github.com/hakimel/reveal.js#dependencies
+			Reveal.initialize({
+				controls: false,
+				controlsTutorial: false,
+				slideNumber: 'c/t',
+				history: true,
+                transitionSpeed: 'fast',
+              	postMessage: true,
+			  	showNotes: document.location.search.indexOf('showNotes=true') >= 0,
+				dependencies: [
+					{ src: 'lib/plugins/markdown/marked.js' },
+					{ src: 'lib/plugins/markdown/markdown.js' },
+				  	{ src: 'lib/plugins/dinasize/index.js', async: true, callback: () => {
+                        dinasize()
+				  	} },
+					{ src: 'lib/plugins/notes/notes.js', async: true },
+					{ src: 'lib/plugins/prism/prism.js', async: true, callback: () => {
+						Array.from(document.querySelectorAll('pre code')).forEach(block => {
+							block.addEventListener('blur', () => {
+								Prism.highlightElement(block)
+							})
+						})
+					} }
+				]
+			})
+
+            function rand(min, max) {
+              return Math.floor(Math.random() * (max - min + 1)) + min
+            }
+
+            function getRandomColor() {
+              const letters = '0123456789ABCDEF'
+              let color = '#'
+
+              for (let i = 0; i < 6; i++) {
+                color += letters[rand(0, 15)]
+              }
+
+              return color
+            }
+
+
+            const ps = Array.from(document.querySelectorAll('.random'))
+
+			ps.forEach(p => {
+				p.style.position = 'absolute'
+			  	p.style.top = `${rand(0, 80)}%`
+			  	p.style.left = `${rand(0, 80)}%`
+			  	p.style.transform = `rotate(${rand(-90, 90)}deg)`
+
+			  	p.style.color = getRandomColor()
+			  	p.style.fontSize = `${rand(1, 5)}em`
+			})
+		</script>
+	</body>
+</html>
