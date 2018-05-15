@@ -522,6 +522,7 @@
       { src: 'lib/plugins/dinasize/index.js', async: true, callback: () => {
           dinasize()
         } },
+      { src: 'lib/plugins/remeal/index.js', async: true  },
       { src: 'lib/plugins/notes/notes.js', async: true },
       { src: 'lib/plugins/prism/prism.js', async: true, callback: () => {
           Array.from(document.querySelectorAll('pre code')).forEach(block => {
