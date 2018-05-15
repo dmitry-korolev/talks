@@ -398,7 +398,7 @@
         </section>
 
         <section>
-            <h1>Статика</h1>
+            <h1>Проблемы со&nbsp;статикой</h1>
             <aside class="notes">
                 <p>У каких-то библиотек есть проблемы с сервер-сайдом и выделением CSS в отдельный статический файл.</p>
             </aside>
@@ -522,6 +522,7 @@
       { src: 'lib/plugins/dinasize/index.js', async: true, callback: () => {
           dinasize()
         } },
+      { src: 'lib/plugins/zoom-js/zoom.js', async: true },
       { src: 'lib/plugins/notes/notes.js', async: true },
       { src: 'lib/plugins/prism/prism.js', async: true, callback: () => {
           Array.from(document.querySelectorAll('pre code')).forEach(block => {
