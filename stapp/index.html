@@ -368,7 +368,7 @@
 		</section>
 
 		<section>
-			<pre><code class="language-typescript"><!--
+			<pre style="font-size: 1em;"><code class="language-typescript"><!--
 				type Stapp<State, API> = {
 				  state$: Observable<State>
 				  api: API
@@ -385,7 +385,7 @@
 		</section>
 
 		<section>
-			<pre><code class="language-js"><!--
+			<pre style="font-size: 1em;"><code class="language-js"><!--
 				const view = f(state)
 			--></code></pre>
 			<h3><code></code></h3>
@@ -395,7 +395,7 @@
 		</section>
 
 		<section>
-			<pre><code class="language-js"><!--
+			<pre style="font-size: .7em;"><code class="language-js"><!--
 				const app = createApp({
 					name: 'Payment',
 					modules: [
@@ -467,7 +467,7 @@
 		</section>
 
 		<section>
-			<pre><code class="language-typescript"><!--
+			<pre style="font-size: 1em;"><code class="language-typescript"><!--
 				type Module<Api, State> = {
 				  name: string
 
@@ -492,8 +492,9 @@
 		</section>
 
 		<section>
-			<pre><code class="language-typescript"><!--
-				type Reducer<State> = (State, Event) => State
+			<pre style="font-size: 1em;"><code class="language-typescript"><!--
+				type Reducer<State> =
+					(State, Event) => State
 			--></code></pre>
 			<aside class="notes">
 				<p>На всякий случай повторим.</p>
@@ -502,7 +503,7 @@
 		</section>
 
 		<section>
-			<pre><code class="language-typescript"><!--
+			<pre style="font-size: 1em;"><code class="language-typescript"><!--
 				type Event= {
 					type: string
 					payload: any
@@ -553,7 +554,7 @@
 		</section>
 
 		<section>
-			<pre><code class="language-js"><!--
+			<pre style="font-size: .8em;"><code class="language-js"><!--
 			import { createEvent } from 'stapp'
 
 			const setValue = createEvent('Set value')
@@ -571,7 +572,7 @@
 		</section>
 
 		<section>
-			<pre><code class="language-jsx"><!--
+			<pre style="font-size: .7em;"><code class="language-jsx"><!--
 				// somewhere later
 				<input name='example' onchange={event => api.setValue({
 				  example: event.target.value
@@ -591,8 +592,9 @@
 		</section>
 
 		<section>
-			<pre><code class="language-typescript"><!--
-				type Epic = (Observable<Event>, Observable<State>) => Observable<Event>
+			<pre style="font-size: 1em;"><code class="language-typescript"><!--
+				type Epic = (Observable<Event>, Observable<State>)
+					=> Observable<Event>
 			--></code></pre>
 			<aside class="notes">
 				<p>Собственно, что такое эпик</p>
