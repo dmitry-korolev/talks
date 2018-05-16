@@ -1,316 +1,718 @@
 <!doctype html>
 <!--suppress HtmlFormInputWithoutLabel -->
 <html>
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<base href="../" />
+	<base href="../" />
 
-		<title>Микрофронтенд</title>
+	<title>Микрофронтенд</title>
 
-		<link rel="stylesheet" href="lib/css/reveal.css">
-		<link rel="stylesheet" href="lib/css/theme/moon.css">
+	<link rel="stylesheet" href="lib/css/reveal.css">
+	<link rel="stylesheet" href="lib/css/theme/moon.css">
 
-		<!-- Theme used for syntax highlighting of code -->
-		<link rel="stylesheet" href="lib/plugins/prism/night.css">
+	<!-- Theme used for syntax highlighting of code -->
+	<link rel="stylesheet" href="lib/plugins/prism/night.css">
 
-		<!-- Printing and PDF exports -->
-		<script>
-			const link = document.createElement( 'link' );
-			link.rel = 'stylesheet';
-			link.type = 'text/css';
-			link.href = window.location.search.match( /print-pdf/gi ) ? 'lib/css/print/pdf.css' : 'lib/css/print/paper.css';
-			document.getElementsByTagName( 'head' )[0].appendChild( link );
-		</script>
-	</head>
+	<!-- Printing and PDF exports -->
+	<script>
+      const link = document.createElement( 'link' );
+      link.rel = 'stylesheet';
+      link.type = 'text/css';
+      link.href = window.location.search.match( /print-pdf/gi ) ? 'lib/css/print/pdf.css' : 'lib/css/print/paper.css';
+      document.getElementsByTagName( 'head' )[0].appendChild( link );
+	</script>
+</head>
 
-	<body>
-		<div class="reveal">
-			<div class="slides">
-				<section>
-					<h1>Микрофронтенд</h1>
-					<p style="line-height: 0.7">
-						<small>Дима Королев, разработчик Tinkoff.ru</small><br />
-						<small>email: <a href="mailto:dima@korolev.dk">dima@korolev.dk</a></small><br />
-						<small>github: <a href="https://github.com/dmitry-korolev">/dmitry-korolev</a></small><br />
-						<small>telegram: <a href="https://t.me/dimakorolev">@dimakorolev</a></small>
-					</p>
-					<aside class="notes">
-						<p>Всем привет. Меня зовут Дима Королев, и я - разработчик в банке Тинькофф.</p>
-					</aside>
-				</section>
+<body>
+<div class="reveal">
+	<div class="slides">
+		<section>
+			<h1>Микрофронтенд</h1>
+			<p style="line-height: 0.7">
+				<small>Дима Королев, разработчик Tinkoff.ru</small><br />
+				<small>email: <a href="mailto:dima@korolev.dk">dima@korolev.dk</a></small><br />
+				<small>github: <a href="https://github.com/dmitry-korolev">/dmitry-korolev</a></small><br />
+				<small>telegram: <a href="https://t.me/dimakorolev">@dimakorolev</a></small>
+			</p>
+			<aside class="notes">
+				<p>Всем привет. Меня зовут Дима Королев, и я - разработчик в банке Тинькофф.</p>
+			</aside>
+		</section>
 
-                <section>
-                    <h1>Интро</h1>
-                    <aside class="notes">
-                        <p>Сегодня мы обсудим несколько крайне холиварных тем, холиварных, потому что вопросы архитектуры всегда холиварные.</p>
-                    </aside>
-                </section>
+		<section>
+			<h1>Интро</h1>
+			<aside class="notes">
+				<p>Сегодня мы обсудим несколько крайне холиварных тем, холиварных, потому что вопросы архитектуры всегда холиварные.</p>
+			</aside>
+		</section>
 
-				<section>
-					<h1>В чем главная особенность современного веба?</h1>
-				</section>
+		<section>
+			<h1>В чем главная особенность современного веба?</h1>
+		</section>
 
-				<section>
-					<h1>Фичи</h1>
-					<div style="height: 0">
-						<p class="fragment random">Фичи</p>
-						<p class="fragment random">Фичи</p>
-						<p class="fragment random">Фичи</p>
-						<p class="fragment random">Фичи</p>
-						<p class="fragment random">Фичи</p>
-						<p class="fragment random">Фичи</p>
-						<p class="fragment random">Фичи</p>
-						<p class="fragment random">Фичи</p>
-						<p class="fragment random">Фичи</p>
-						<p class="fragment random">Фичи</p>
-						<p class="fragment random">Фичи</p>
-						<p class="fragment random">Фичи</p>
-						<p class="fragment random">Фичи</p>
-						<p class="fragment random">Фичи</p>
-						<p class="fragment random">Фичи</p>
-						<p class="fragment random">Фичи</p>
-						<p class="fragment random">Фичи</p>
-						<p class="fragment random">Фичи</p>
-						<p class="fragment random">Фичи</p>
-						<p class="fragment random">Фичи</p>
-					</div>
-					<aside class="notes">
-						<p>
-							В том, что с каждым годом требования к веб-приложениям всё увеличиваются. Количество фич растет радикально. Выражение «толстый клиент» принимается как само собой разумеющееся и уже никого не удивляет.
-						</p>
-					</aside>
-				</section>
-
-				<section data-background-image="/stapp/images/itsok.jpg">
-					<aside class="notes">
-						<p>
-							И это нормально. Большие приложения на клиенте - это круто. Но, с другой стороны, это вызывает две глобальные проблемы.
-						</p>
-					</aside>
-				</section>
-
-				<section>
-					<h1>Раздувание</h1>
-					<aside class="notes">
-						<p>
-							Первая - раздувание кода. Бандлы по несколько сотен килобайт в сжатом виде, да? Далеко за пределами ходить не надо.
-						</p>
-					</aside>
-				</section>
-
-				<section data-background-image="/stapp/images/tinkoff-size.png" data-background-position="bottom left">
-					<aside class="notes">
-						<p>Заходим на главную tinkoff.ru - 350кб только на JS.</p>
-					</aside>
-				</section>
-
-				<section data-background-image="/stapp/images/payments-size.png" data-background-position="bottom left">
-					<aside class="notes">
-						<p> Заходим в, прости господи, раздел платежей - все 850 кб. Все это долго грузится, долго парсится, долго выполняется.</p>
-					</aside>
-				</section>
-
-				<section>
-					<h1>Сложность</h1>
-					Сюда докинуть картинку с графом зависимостей платежей
-					<aside class="notes">
-						<p>
-							Вторая проблема - растущая в геометрической прогрессии сложность. Чем больше функциональность у приложения, чем из большего количества функциональных блоков оно состоит - тем больше между ними связей, тем сложнее уследить за тем, что происходит, тем сложнее войти в проект.
-						</p>
-					</aside>
-				</section>
-
-				<section>
-					<h1>И это еще не&nbsp;всё!</h1>
-					<aside class="notes">
-						<p>Это не единственные проблемы, но, на мой взгляд, основные, и все прочие выливаются из этих двух. И если первую проблему худо-бедно научились решать, то со второй надо что-то делать, и срочно.</p>
-					</aside>
-				</section>
-
-				<section>
-					<h1>KO</h1>
-					<aside class="notes">
-						<p>Побуду немного капитаном очевидность и скажу то, что всем и так понятно.</p>
-					</aside>
-				</section>
-
-				<section>
-					<h1>Меньше&nbsp;=&nbsp;проще</h1>
-					<aside class="notes">
-						<p>Маленькие приложения проще разрабатывать и поддерживать.</p>
-					</aside>
-				</section>
-
-				<section>
-					<h1>Микрофронтенд</h1>
-					<aside class="notes">
-						<p>И вполне естественным кажется подход, уже опробованный, отработанный и принятый на вооружение в бекенде - это разделение приложений на несколько отдельных приложений. В бекенде это называется микросервисами.</p>
-					</aside>
-				</section>
-
-				<section>
-					<h1 style="text-decoration: line-through">Микросервисы</h1>
-					<aside class="notes">
-						<p>На фронте предпочительней использовать другие термины, такие как микрофронтенд, или микроприложения на фронте, или как угодно, но только не микросервисы, потому что к сервисам в том понимании, в котором это слово используется на беке, микроприложения на фронте не имеют никакого отношения.</p>
-					</aside>
-				</section>
-
-				<section data-background-image="/stapp/images/opentable.png">
-					<h1>2015</h1>
-
-					<aside class="notes">
-						<p>Вообще, тема с микрофронтендом не нова. Первые упоминания, первые попытки обосновать переход на микросервисный подход в архитектуре вебприложений появились еще примерно в 2015 году.</p>
-						<p><a href="http://tech.opentable.co.uk/blog/2015/02/09/dismantling-the-monolith-microsites-at-opentable/">Dismantling the monolith - Microsites at Opentable</a></p>
-					</aside>
-				</section>
-
-				<section data-background-image="/stapp/images/xebia.png">
-					<h1>2015</h1>
-					<aside class="notes">
-						<p><a href="http://blog.xebia.com/the-monolithic-frontend-in-the-microservices-architecture/">The monolithic frontend in the microservices architecture</a></p>
-					</aside>
-				</section>
-
-				<section data-background-image="/stapp/images/techradar.png">
-					<h1>2016</h1>
-
-					<aside class="notes">
-						<p>На техрадаре термин "микрофронтенд" появился в 2016 году, и в 2017-м перешел в статус Trial, подразумевающий, что подход еще требует уточнения, но в целом кажется вполне уместным и достойным внедрения.</p>
-						<p><a href="https://www.thoughtworks.com/radar/techniques/micro-frontends">Micro frontends</a></p>
-					</aside>
-				</section>
-
-				<section data-background-image="/stapp/images/now.png">
-					<h1>Сейчас</h1>
-					<aside class="notes">
-						<p>В результате о микроприложениях сейчас не говорит только ленивый. За последние года полтора не было ни одной более-менее крупной конференции, на которой не говорили бы о микрофронтенде.</p>
-						<ul>
-							<li><a href="https://engineering.hellofresh.com/front-end-microservices-at-hellofresh-23978a611b87">Front-end Microservices at HelloFresh</a></li>
-							<li><a href="https://micro-frontends.org/">Micro Frontends</a></li>
-							<li><a href="https://hackernoon.com/front-end-microservices-with-web-components-597759313393">Front-end microservices with Web Components</a></li>
-							<li><a href="https://medium.com/@tomsoderlund/micro-frontends-a-microservice-approach-to-front-end-web-development-f325ebdadc16">Micro frontends—a microservice approach to front-end web development</a></li>
-						</ul>
-					</aside>
-				</section>
-
-				<section data-background-image="/stapp/images/what-are-you.jpg">
-					<h1>Что ты такое?</h1>
-					<aside class="notes">
-						<p>
-							Так, собственно, что такое микрофронтенд?
-						</p>
-					</aside>
-				</section>
-
-				<section>
-					<h1>Разделяй и&nbsp;властвуй</h1>
-					<aside class="notes">
-						<p>В общем случае - это подход, предполагающий разделение одного большого приложения на множество маленьких.</p>
-						<p>Почему множество?</p>
-						<p>Потому что если твоё приложение делится на два или три, то тебе это не нужно.</p>
-					</aside>
-				</section>
-
-				<section>
-					<h1>А подробней?</h1>
-					<aside class="notes">
-						<p>А вот дальше начинаются нюансы. Под микрофронтендом понимаются порой совсем разные вещи.</p>
-						<p>И спектр вариантов довольно-таки широк.</p>
-					</aside>
-				</section>
-
-				<section data-background-image="/stapp/images/microservice.png">
-					<aside class="notes">
-						<p>Крайний случай - напрямую переносить подход микросервисов. Один или несколько роутов - одно приложение. Еще несколько - второе. Еще несколько - третье. Приложения полностью разделены, поддерживаются разными командами и практически никак не пересекаются.</p>
-					</aside>
-				</section>
-
-				<section data-background-image="/stapp/images/microservice2.png">
-					<aside class="notes">
-						<p>Понятное дело, что на фронте так не работает. Всё равно хочется доставлять как можно меньше кода до клиента, всё равно хочется выносить какую-то логику в общие модули, и в итоге эти приложения всё равно обрастают связями. До какой-то степени это можно держать под контролем, но решает ли такой подход глобальную проблему?</p>
-					</aside>
-				</section>
-
-				<section data-background-image="/stapp/images/payments.png"></section>
-				<section data-background-image="/stapp/images/payments-with-apps.png"></section>
-
-				<section>
-					<h1><code>view = f(state)</code></h1>
-				</section>
-
-				<section>
-					<a href="https://clck.ru/DKTSf"><img style="height: 9em" src="/stapp/qrcode.svg" alt=""></a>
-					<p style="line-height: 0.7">
-						<small>Веб-версия доклада: <a href="https://clck.ru/DKTSf">https://clck.ru/DKTSf</a></small><br />
-						<small>email: <a href="mailto:dima@korolev.dk">dima@korolev.dk</a></small><br />
-						<small>github: <a href="https://github.com/dmitry-korolev">/dmitry-korolev</a></small><br />
-						<small>telegram: <a href="https://t.me/dimakorolev">@dimakorolev</a></small>
-					</p>
-				</section>
+		<section>
+			<h1>Фичи</h1>
+			<div style="height: 0">
+				<p class="fragment random">Фичи</p>
+				<p class="fragment random">Фичи</p>
+				<p class="fragment random">Фичи</p>
+				<p class="fragment random">Фичи</p>
+				<p class="fragment random">Фичи</p>
+				<p class="fragment random">Фичи</p>
+				<p class="fragment random">Фичи</p>
+				<p class="fragment random">Фичи</p>
+				<p class="fragment random">Фичи</p>
+				<p class="fragment random">Фичи</p>
+				<p class="fragment random">Фичи</p>
+				<p class="fragment random">Фичи</p>
+				<p class="fragment random">Фичи</p>
+				<p class="fragment random">Фичи</p>
+				<p class="fragment random">Фичи</p>
+				<p class="fragment random">Фичи</p>
+				<p class="fragment random">Фичи</p>
+				<p class="fragment random">Фичи</p>
+				<p class="fragment random">Фичи</p>
+				<p class="fragment random">Фичи</p>
 			</div>
-		</div>
+			<aside class="notes">
+				<p>
+					В том, что с каждым годом требования к веб-приложениям всё увеличиваются. Количество фич растет радикально. Выражение «толстый клиент» принимается как само собой разумеющееся и уже никого не удивляет.
+				</p>
+			</aside>
+		</section>
 
-		<script src="lib/js/head.min.js"></script>
-		<script src="lib/js/reveal.js"></script>
+		<section data-background-image="stapp/images/itsok.jpg">
+			<aside class="notes">
+				<p>
+					И это нормально. Большие приложения на клиенте - это круто. Но, с другой стороны, это вызывает две глобальные проблемы.
+				</p>
+			</aside>
+		</section>
 
-		<script>
-			// More info about config & dependencies:
-			// - https://github.com/hakimel/reveal.js#configuration
-			// - https://github.com/hakimel/reveal.js#dependencies
-			Reveal.initialize({
-				controls: false,
-				controlsTutorial: false,
-				slideNumber: 'c/t',
-				history: true,
-                transitionSpeed: 'fast',
-              	postMessage: true,
-			  	showNotes: document.location.search.indexOf('showNotes=true') >= 0,
-				dependencies: [
-					{ src: 'lib/plugins/markdown/marked.js' },
-					{ src: 'lib/plugins/markdown/markdown.js' },
-				  	{ src: 'lib/plugins/dinasize/index.js', async: true, callback: () => {
-                        dinasize()
-				  	} },
-					{ src: 'lib/plugins/notes/notes.js', async: true },
-					{ src: 'lib/plugins/prism/prism.js', async: true, callback: () => {
-						Array.from(document.querySelectorAll('pre code')).forEach(block => {
-							block.addEventListener('blur', () => {
-								Prism.highlightElement(block)
-							})
-						})
-					} }
-				]
-			})
+		<section>
+			<h1>Раздувание</h1>
+			<aside class="notes">
+				<p>
+					Первая - раздувание кода. Бандлы по несколько сотен килобайт в сжатом виде, да? Далеко за пределами ходить не надо.
+				</p>
+			</aside>
+		</section>
 
-            function rand(min, max) {
-              return Math.floor(Math.random() * (max - min + 1)) + min
-            }
+		<section data-background-image="stapp/images/tinkoff-size.png" data-background-position="bottom left">
+			<aside class="notes">
+				<p>Заходим на главную tinkoff.ru - 350кб только на JS.</p>
+			</aside>
+		</section>
 
-            function getRandomColor() {
-              const letters = '0123456789ABCDEF'
-              let color = '#'
+		<section data-background-image="stapp/images/payments-size.png" data-background-position="bottom left">
+			<aside class="notes">
+				<p> Заходим в, прости господи, раздел платежей - все 850 кб. Все это долго грузится, долго парсится, долго выполняется.</p>
+			</aside>
+		</section>
 
-              for (let i = 0; i < 6; i++) {
-                color += letters[rand(0, 15)]
-              }
+		<section>
+			<h1>Сложность</h1>
+			Сюда докинуть картинку с графом зависимостей платежей
+			<aside class="notes">
+				<p>
+					Вторая проблема - растущая в геометрической прогрессии сложность. Чем больше функциональность у приложения, чем из большего количества функциональных блоков оно состоит - тем больше между ними связей, тем сложнее уследить за тем, что происходит, тем сложнее войти в проект.
+				</p>
+			</aside>
+		</section>
 
-              return color
-            }
+		<section>
+			<h1>И это еще не&nbsp;всё!</h1>
+			<aside class="notes">
+				<p>Это не единственные проблемы, но, на мой взгляд, основные, и все прочие выливаются из этих двух. И если первую проблему худо-бедно научились решать, то со второй надо что-то делать, и срочно.</p>
+			</aside>
+		</section>
+
+		<section>
+			<h1>KO</h1>
+			<aside class="notes">
+				<p>Побуду немного капитаном очевидность и скажу то, что всем и так понятно.</p>
+			</aside>
+		</section>
+
+		<section>
+			<h1>Меньше&nbsp;=&nbsp;проще</h1>
+			<aside class="notes">
+				<p>Маленькие приложения проще разрабатывать и поддерживать.</p>
+			</aside>
+		</section>
+
+		<section>
+			<h1>Микрофронтенд</h1>
+			<aside class="notes">
+				<p>И вполне естественным кажется подход, уже опробованный, отработанный и принятый на вооружение в бекенде - это разделение приложений на несколько отдельных приложений. В бекенде это называется микросервисами.</p>
+			</aside>
+		</section>
+
+		<section>
+			<h1 style="text-decoration: line-through">Микросервисы</h1>
+			<aside class="notes">
+				<p>На фронте предпочительней использовать другие термины, такие как микрофронтенд, или микроприложения на фронте, или как угодно, но только не микросервисы, потому что к сервисам в том понимании, в котором это слово используется на беке, микроприложения на фронте не имеют никакого отношения.</p>
+			</aside>
+		</section>
+
+		<section data-background-image="stapp/images/opentable.png">
+			<h1>2015</h1>
+
+			<aside class="notes">
+				<p>Вообще, тема с микрофронтендом не нова. Первые упоминания, первые попытки обосновать переход на микросервисный подход в архитектуре вебприложений появились еще примерно в 2015 году.</p>
+				<p><a href="http://tech.opentable.co.uk/blog/2015/02/09/dismantling-the-monolith-microsites-at-opentable/">Dismantling the monolith - Microsites at Opentable</a></p>
+			</aside>
+		</section>
+
+		<section data-background-image="stapp/images/xebia.png">
+			<h1>2015</h1>
+			<aside class="notes">
+				<p><a href="http://blog.xebia.com/the-monolithic-frontend-in-the-microservices-architecture/">The monolithic frontend in the microservices architecture</a></p>
+			</aside>
+		</section>
+
+		<section data-background-image="stapp/images/techradar.png">
+			<h1>2016</h1>
+
+			<aside class="notes">
+				<p>На техрадаре термин "микрофронтенд" появился в 2016 году, и в 2017-м перешел в статус Trial, подразумевающий, что подход еще требует уточнения, но в целом кажется вполне уместным и достойным внедрения.</p>
+				<p><a href="https://www.thoughtworks.com/radar/techniques/micro-frontends">Micro frontends</a></p>
+			</aside>
+		</section>
+
+		<section data-background-image="stapp/images/now.png">
+			<h1>Сейчас</h1>
+			<aside class="notes">
+				<p>В результате о микроприложениях сейчас не говорит только ленивый. За последние года полтора не было ни одной более-менее крупной конференции, на которой не говорили бы о микрофронтенде.</p>
+				<ul>
+					<li><a href="https://engineering.hellofresh.com/front-end-microservices-at-hellofresh-23978a611b87">Front-end Microservices at HelloFresh</a></li>
+					<li><a href="https://micro-frontends.org/">Micro Frontends</a></li>
+					<li><a href="https://hackernoon.com/front-end-microservices-with-web-components-597759313393">Front-end microservices with Web Components</a></li>
+					<li><a href="https://medium.com/@tomsoderlund/micro-frontends-a-microservice-approach-to-front-end-web-development-f325ebdadc16">Micro frontends—a microservice approach to front-end web development</a></li>
+				</ul>
+			</aside>
+		</section>
+
+		<section data-background-image="stapp/images/what-are-you.jpg">
+			<h1>Что ты такое?</h1>
+			<aside class="notes">
+				<p>
+					Так, собственно, что такое микрофронтенд?
+				</p>
+			</aside>
+		</section>
+
+		<section>
+			<h1>Разделяй и&nbsp;властвуй</h1>
+			<aside class="notes">
+				<p>В общем случае - это подход, предполагающий разделение одного большого приложения на множество маленьких.</p>
+				<p>Почему множество?</p>
+				<p>Потому что если твоё приложение делится на два или три, то тебе это не нужно.</p>
+			</aside>
+		</section>
+
+		<section>
+			<h1>А подробней?</h1>
+			<aside class="notes">
+				<p>А вот дальше начинаются нюансы. Под микрофронтендом понимаются порой совсем разные вещи.</p>
+				<p>И спектр вариантов довольно-таки широк.</p>
+			</aside>
+		</section>
+
+		<section>
+			<img src="stapp/images/microservice.png" alt="">
+			<aside class="notes">
+				<p>Крайний случай - напрямую переносить подход микросервисов. Один или несколько роутов - одно приложение. Еще несколько - второе. Еще несколько - третье. Приложения полностью разделены, поддерживаются разными командами и практически никак не пересекаются.</p>
+			</aside>
+		</section>
+
+		<section>
+			<img src="stapp/images/microservice2.png" alt="">
+			<aside class="notes">
+				<p>Понятное дело, что на фронте так не работает. Всё равно хочется доставлять как можно меньше кода до клиента, всё равно хочется выносить какую-то логику в общие модули, и в итоге эти приложения всё равно обрастают связями. До какой-то степени это можно держать под контролем, но решает ли такой подход глобальную проблему?</p>
+			</aside>
+		</section>
+
+		<section>
+			<h1>Всё только хуже</h1>
+			<aside class="notes">
+				<p>Нет, не решает. Всё становится только хуже и в итоге вместо одного монолита получается несколько намертво привязанных друг к другу монолитов.</p>
+			</aside>
+		</section>
+
+		<section data-background-image="stapp/images/payments.png">
+			<aside class="notes">
+				<p>Противоположный взгляд на микрофронтенд, и при этом наиболее актуальный, - это подход, рассматривающий в качестве приложений не всю страницу целиком, а отдельные её части.</p>
+				<p>В качестве примера могу привести ту же главную страницу платежей.</p>
+			</aside>
+		</section>
+
+		<section data-background-image="stapp/images/payments-with-apps.png">
+			<aside class="notes">
+				<p>Можно выделить как минимум 7 отдельных приложений, которые вполне могут работать независимо друг от друга.</p>
+				<p>И это я еще не говорю о приложениях, которые могут вообще не выдавать своего присутствия, например, приложение, отслеживающее действия пользователя.</p>
+				<p>Ну и сама по себе страница-контейнер тоже становится относительно небольшим приложением, лишь отчасти влияющим на то, что на ней происходит.</p>
+			</aside>
+		</section>
+
+		<section>
+			<h1>Веб-компоненты</h1>
+			<aside class="notes">
+				<p>Интересно, что современный веб прикладывает значительные усилия к тому, чтобы внедрялся и развивался именно этот подход. Я говорю о нативных веб-компонентах, например, которые позволяют полностью спрятать подробности реализации и вставлять компонент в страницу обычной вставкой html-тега.</p>
+			</aside>
+		</section>
+
+		<section>
+			<h1>Накладные расходы</h1>
+			<aside class="notes">
+				<p>Разумеется, подход микроприложений несет дополнительные накладные расходы и некий оверхед.</p>
+			</aside>
+		</section>
+
+		<section>
+			<h1>Необходимость коммуникации</h1>
+			<aside class="notes">
+				<p>Во-первых, разумеется, приложения не могут быть независимыми на 100%.</p>
+				<p>Они всё равно должны уметь обмениваться какой-то информацией, иметь какое-то общее состояние.</p>
+				<p>Это означает необходимость разработки какого-то общего слоя в приложении, который будет обеспечивать коммуникацию.</p>
+			</aside>
+		</section>
+
+		<section>
+			<h1>Отсутствие стандартов</h1>
+			<aside class="notes">
+				<p>Во-вторых, когда все приложения делаются независимо друг от друга, пусть и договорившись о каком-то общем информационном канале, есть риск, что будет возникать много одинаковой логики, которую все будут писать по-разному, будут подключаться разные библиотеки для одних и тех же задач, и опять-таки будет раздуваться JS.</p>
+			</aside>
+		</section>
+
+		<section>
+			<img src="stapp/images/microapps.png" alt="">
+			<aside class="notes">
+				<p>Разумеется, это всё нужно ограничивать. Вот такие вот картинки могут существовать только во влажных мечтах евангелистов тех самых веб-компонентов.</p>
+				<p>На практике в конкретных проектах всегда нужно договариваться о совместно используемых технологиях, чтобы не допускать вышеупомянутых проблем.</p>
+			</aside>
+		</section>
+
+		<section>
+			<img src="stapp/images/architecture.png" alt="">
+			<aside class="notes">
+				<p>В результате можно прийти к следующему (довольно-таки абстрактному) пониманию архитектуры приложения.</p>
+				<ol>
+					<li>Есть некие общие утилитарные библиотеки: утилиты для операциями над данными, утилиты для выполнения запросов, какие-то общие константы и так далее.</li>
+					<li>Есть сами микроприложения - независимые друг от друга приложения, способные сосуществовать на одной странице, по возможности использующие общие библиотеки.</li>
+					<li>Есть общий и единственный информационный канал, который доступен всем микроприложениям и используется всеми одинаково.</li>
+					<li>Есть процесс для определения, какие микроприложения должны показываться на странице, собирающий всё, что ими используется в единый бандл, и развертывающий его на сервере.</li>
+				</ol>
+
+				<p>И мне нравится, что платформа сейчас активно идет именно к подобной архитектуре. Выносятся в отдельные библиотеки утилиты для запросов, развивается канал, позволяющий общаться модулям друг с другом. По сути сейчас есть всё, чтобы активно заниматься собственно микроприложениями.</p>
+			</aside>
+		</section>
+
+		<section>
+			<h1>А что с микроприложениями?</h1>
+			<aside class="notes">
+				<p>Осталось только решить, как их делать, эти самые микроприложения.</p>
+				<p>И в целом требования к ним понятны.</p>
+			</aside>
+		</section>
+
+		<section>
+			<h1>Своё состояние</h1>
+			<aside class="notes">
+				<p>Приложение должно иметь собственное состояние</p>
+			</aside>
+		</section>
+
+		<section>
+			<h1>API</h1>
+			<aside class="notes">
+				<p>Приложение должно предоставлять возможность изменять его состояние</p>
+			</aside>
+		</section>
+
+		<section>
+			<h1>Отслеживание состояния</h1>
+			<aside class="notes">
+				<p>Приложение должно давать возможность подписываться на изменения его состояния</p>
+			</aside>
+		</section>
+
+		<section>
+			<h1>Переиспользуемость</h1>
+			<aside class="notes">
+				<p>Логика, используемая в приложении, должна быть легко отделяема от него. Проще говоря, логику должно быть легко переиспользовать.</p>
+			</aside>
+		</section>
+
+		<section>
+			<h1>Stapp</h1>
+			<aside class="notes">
+				<p>Как реализация этих требований появилась библиотека Stapp.</p>
+			</aside>
+		</section>
+
+		<section>
+			<img src="stapp/images/stapp-app.png" alt="">
+			<aside class="notes">
+				<p>Основная её функция - это собирать приложение из так называемых модулей.</p>
+				<p>Каждый модуль выполняет одну конкретную задачу и у каждого есть своё описание в документации.</p>
+				<p>Это еще одна задача, которую мы хотели решить: чтобы технологи и разработчики говорили на одном языке. Чтобы технолог мог, образно говоря, собрать схему приложения из готовых блоков, и разработчик делал то же самое - просто подключал к приложению блоки, которые уже есть, при необходимости дописывал новые, и всё, готово.</p>
+			</aside>
+		</section>
+
+		<section>
+			<img src="stapp/images/redux-rxjs.png" alt="">
+			<h4>redux + rxjs</h4>
+			<aside class="notes">
+				<p>Основу stapp составляют redux и rxjs. Redux используется для хранения состояния, rxjs для всего остального. В теории от redux можно было бы избавиться вообще, но есть множество причин, по которым я решил его оставить</p>
+				<ul>
+					<li>Redux понятен и прост</li>
+					<li>Есть много готовых инструментов, таких как redux-logger и redux-devtools</li>
+					<li>Малый размер</li>
+				</ul>
+			</aside>
+		</section>
+
+		<section>
+			<pre><code class="language-typescript"><!--
+				type Stapp<State, API> = {
+				  state$: Observable<State>
+				  api: API
+
+				  name: string
+				  dispatch: (any) => any
+				  getState: () => State
+				}
+			--></code></pre>
+			<aside class="notes">
+				<p>В терминологии Stapp приложение это простой объект с несколькими полями. Главные из них - первые два. Остальные нужны только для тестирования.</p>
+				<p>Предполагается, что view подписывается на состояние и в ответ на какие-то действия пользователя дергает нужные методы API.</p>
+			</aside>
+		</section>
+
+		<section>
+			<pre><code class="language-js"><!--
+				const view = f(state)
+			--></code></pre>
+			<h3><code></code></h3>
+			<aside class="notes">
+				<p>Таким образом решается еще одна задача - полное отвязывание логики от view. По сути это означает, что можно взять готовое приложение и использовать его в проекте на реакте, на ангуляре, на вью. В собственных проектах я использовал Stapp совместно с преактом и веб-компонентами.</p>
+			</aside>
+		</section>
+
+		<section>
+			<pre><code class="language-js"><!--
+				const app = createApp({
+					name: 'Payment',
+					modules: [
+						formBase(),
+						loaders(),
+						validation({...}),
+						userFetching({...}),
+						convertion({...}),
+						commission({...}),
+						payment({...})
+					]
+				})
+			--></code></pre>
+			<aside class="notes">
+				<p>Как я уже сказал, в Stapp приложение собирается из модулей, и выглядит это как-то так.</p>
+			</aside>
+		</section>
+
+		<section>
+			<h1>Модули</h1>
+			<aside class="notes">
+				<p>Теперь поговорим собственно про модули.</p>
+			</aside>
+		</section>
+
+		<section>
+			<h1>Состояние</h1>
+			<aside class="notes">
+				<p>В stapp модули имеют следующие возможности</p>
+				<p>Управление собственной частью состояния всего приложения</p>
+			</aside>
+		</section>
+
+		<section>
+			<h1>API</h1>
+			<aside class="notes">
+				<p>Добавление собственных методов в публичный API приложения</p>
+			</aside>
+		</section>
+
+		<section>
+			<h1>Отслеживание</h1>
+			<aside class="notes">
+				<p>И, наконец, реагирование на изменение состояния и вызовы методов API</p>
+			</aside>
+		</section>
+
+		<section>
+			<h1>formBase</h1>
+			<aside class="notes">
+				<p>Из коробки вместе со Stapp поставляются несколько готовых модулей</p>
+				<p>Например, это formBase, позволяющий без боли работать с состоянием форм</p>
+			</aside>
+		</section>
+
+		<section>
+			<h1>validate</h1>
+			<aside class="notes">
+				<p>Validate, работает совместно с formBase и предоставляющий возможность синхронно и асинхронно валидировать состояние</p>
+			</aside>
+		</section>
+
+		<section>
+			<h1>persist</h1>
+			<aside class="notes">
+				<p>Persist, модуль который вообще не имеет своего состояния и api, и занимается исключительно сохранением и восстановлением состоянием всего приложения</p>
+				<p>Это не всё, но остальные не такие интересные или пока только в планах сущетсвуют.</p>
+			</aside>
+		</section>
+
+		<section>
+			<pre><code class="language-typescript"><!--
+				type Module<Api, State> = {
+				  name: string
+
+				  state?: Reducer<State> // Состояние
+				  api?: Api              // API
+				  epic?: Epic            // Отслеживание
+				}
+			--></code></pre>
+			<aside class="notes">
+				<p>Итак, как собственно выглядят модули. По сути это простой объект, состоящий из нескольких полей, только одно из которых обязательно.</p>
+				<p>Все прочие опциональны и служат для выполнения упомянутых выше задач.</p>
+				<p>Примеры использования каждого рассмотрим далее.</p>
+				<p>На самом деле здесь тоже нет чего-то принципиально нового, это просто дальнейшее развитие концепции так называемых ducks.</p>
+			</aside>
+		</section>
+
+		<section>
+			<h1>Модули: состояние</h1>
+			<aside class="notes">
+				<p>Так как Stapp построен на базе redux, в нем используются вполне привычные понятия редьюсеров и событий.</p>
+			</aside>
+		</section>
+
+		<section>
+			<pre><code class="language-typescript"><!--
+				type Reducer<State> = (State, Event) => State
+			--></code></pre>
+			<aside class="notes">
+				<p>На всякий случай повторим.</p>
+				<p>Редьюсер - это функция принимающая состояние и событие и возвращающая новое состояние.</p>
+			</aside>
+		</section>
+
+		<section>
+			<pre><code class="language-typescript"><!--
+				type Event= {
+					type: string
+					payload: any
+					meta: any
+					error: boolean
+				}
+			--></code></pre>
+			<aside class="notes">
+				<p>Событие (или action в redux-терминологии) это простой объект, единственное обязательное поле в котором - это поле type.</p>
+				<p>При этом Stapp следует стандарту flux-standard-action, в котором вся полезная нагрузка передается в поле payload, дополнительные мета-данные в поле meta.</p>
+			</aside>
+		</section>
+
+		<section>
+			<pre><code class="language-js"><!--
+			import { createEvent, createReducer } from 'stapp'
+
+			const setValue = createEvent('Set value')
+			const reset = createEvent('Reset state')
+
+			const valuesReducer = createReducer({})
+				.on(setValue, (values, newValues) => ({ ...values, ...newValues }))
+				.reset(reset)
+
+			const formBase = {
+				name: FORM_BASE,
+				state: {
+					values: valuesReducer,
+					errors: errorsReducer
+				}
+			}
+			--></code></pre>
+			<aside class="notes">
+				<p>Так как в Stapp используются в целом классические редьюсеры и события, для их создания можно использовать кучу разных инструментов, таких как redux-act или redux-action.</p>
+				<p>В комплекте так же поставляются несколько инструментов, вдохновленных redux-act, но с добавлением чуть большего количества стероидов.</p>
+				<p>Те, кто знаком с redux, возможно, уже миллион раз в голове задали вопрос, почему я называю экшены событиями.</p>
+				<p>На самом деле всё просто. Экшен - или "действие" - это команда. При этом экшены редакса по сути не являются командами, потому что их не выполняют, на них подписываются, что более характерно для событий.</p>
+				<p>Это просто мнение, с ним можно не соглашаться, и спокойно продолжать использовать термин "экшен".</p>
+				<p>Итак, редьюсеры реагируют на события, но кто их диспатчит?</p>
+			</aside>
+		</section>
+
+		<section>
+			<h1>Модули: API</h1>
+			<aside class="notes">
+				<p>В Stapp есть множество способов диспатчить события, но основных два.</p>
+			</aside>
+		</section>
+
+		<section>
+			<pre><code class="language-js"><!--
+			import { createEvent } from 'stapp'
+
+			const setValue = createEvent('Set value')
+
+			export const formBase = {
+				name: FORM_BASE,
+				api: {
+					setValue
+				}
+			}
+			--></code></pre>
+			<aside class="notes">
+				<p>Во-первых, в случае, если событие должно быть вызвано из UI, модуль может передать eventCreator в приложение через поле api.</p>
+			</aside>
+		</section>
+
+		<section>
+			<pre><code class="language-jsx"><!--
+				// somewhere later
+				<input name='example' onchange={event => api.setValue({
+				  example: event.target.value
+				})} />
+			--></code></pre>
+			<aside class="notes">
+				<p>В дальнейшем это может использоваться, например, таким образом.</p>
+			</aside>
+		</section>
+
+		<section>
+			<h1>Модули: отслеживание</h1>
+			<aside class="notes">
+				<p>Второй способ диспатчить события - это т.н. эпики.</p>
+				<p>Причем эпики - это крайне мощный и удобный инструмент, позволяющий в одной функции в нескольких строках замешать отслеживание состояния приложения, слушать конкретные события, вызывать какие-то сайд-эффекты и в конечном счете вызывать другие события.</p>
+			</aside>
+		</section>
+
+		<section>
+			<pre><code class="language-typescript"><!--
+				type Epic = (Observable<Event>, Observable<State>) => Observable<Event>
+			--></code></pre>
+			<aside class="notes">
+				<p>Собственно, что такое эпик</p>
+				<p>Эпик - это функция, принимающая стрим из событий и стрим из состояний приложения и возвращающая стрим из событий</p>
+				<p>На самом деле, в stapp эпик может возвращать всё, что угодно, но об этом можно подробнее прочитать в документации</p>
+			</aside>
+		</section>
+
+		<section>
+			<pre><code class="language-js"><!--
+				const saveResults = createEvent('Save search results')
+				const searchReducer = createReducer([])
+					.on(saveResults, (_, results) => results)
+
+				const search = {
+					name: 'form',
+					state: { search: searchReducer  },
+					epic: (_, state$) => state$.pipe(
+						map(state => state.values.search),
+						debounceTime(500), distinctUntilChanged(),
+						switchMap(({ payload: searchValue })
+							=> fetch(`api?search=${searchValue}`)),
+						map(result => saveResults(result)
+					)
+				}
+			--></code></pre>
+			<aside class="notes">
+				<p>Здесь показан пример эпика, отслеживающего состояние поисковой формы.</p>
+				<p>Он подписывается на все изменения состояния, выбирает из него значение поля search, дебаунсит, игнорирует повторы и делает запрос, после чего сохраняет результат в сторе.</p>
+			</aside>
+		</section>
+
+		<section>
+			<a href="https://stapp-docs.now.sh/">stapp-docs.now.sh</a>
+			<aside class="notes">
+				<p>К сожалению, у меня не очень много времени, поэтому я рассказал, о чем успел.</p>
+				<p>У библиотеки есть подробная документация, которую можно изучить по указанному адресу.</p>
+				<p>Сейчас этот подход проходит обкатку в платежах, потихоньку внедряется. Я активно использую stapp  для собственных приложений (даже там, где это особо не нужно - исключительно для обкатки). Есть большие планы по развитию библиотеки, в частности, хочется разделить её на несколько пакетов, хочется добавить биндинги к преакту, веб-компонентам и, если вдруг кому-то захочется, другим view-библиотекам и фреймворкам, выложить это всё в опенсорс, добавить приложениям методы жизненного цикла и много чего еще.</p>
+			</aside>
+		</section>
+
+		<section>
+			<a href="https://clck.ru/DKTSf"><img style="height: 9em" src="stapp/qrcode.svg" alt=""></a>
+			<p style="line-height: 0.7">
+				<small>Веб-версия доклада: <a href="https://clck.ru/DKTSf">https://clck.ru/DKTSf</a></small><br />
+				<small>email: <a href="mailto:dima@korolev.dk">dima@korolev.dk</a></small><br />
+				<small>github: <a href="https://github.com/dmitry-korolev">/dmitry-korolev</a></small><br />
+				<small>telegram: <a href="https://t.me/dimakorolev">@dimakorolev</a></small>
+			</p>
+		</section>
+	</div>
+</div>
+
+<script src="lib/js/head.min.js"></script>
+<script src="lib/js/reveal.js"></script>
+
+<script>
+  // More info about config & dependencies:
+  // - https://github.com/hakimel/reveal.js#configuration
+  // - https://github.com/hakimel/reveal.js#dependencies
+  Reveal.initialize({
+    controls: false,
+    controlsTutorial: false,
+    slideNumber: 'c/t',
+    history: true,
+    transitionSpeed: 'fast',
+    postMessage: true,
+    showNotes: document.location.search.indexOf('showNotes=true') >= 0,
+    dependencies: [
+      { src: 'lib/plugins/markdown/marked.js' },
+      { src: 'lib/plugins/markdown/markdown.js' },
+      { src: 'lib/plugins/dinasize/index.js', async: true, callback: () => {
+          dinasize()
+        } },
+      { src: 'lib/plugins/notes/notes.js', async: true },
+      { src: 'lib/plugins/prism/prism.js', async: true, callback: () => {
+          Array.from(document.querySelectorAll('pre code')).forEach(block => {
+            block.addEventListener('blur', () => {
+              Prism.highlightElement(block)
+            })
+          })
+        } }
+    ]
+  })
+
+  function rand(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min
+  }
+
+  function getRandomColor() {
+    const letters = '0123456789ABCDEF'
+    let color = '#'
+
+    for (let i = 0; i < 6; i++) {
+      color += letters[rand(0, 15)]
+    }
+
+    return color
+  }
 
 
-            const ps = Array.from(document.querySelectorAll('.random'))
+  const ps = Array.from(document.querySelectorAll('.random'))
 
-			ps.forEach(p => {
-				p.style.position = 'absolute'
-			  	p.style.top = `${rand(0, 80)}%`
-			  	p.style.left = `${rand(0, 80)}%`
-			  	p.style.transform = `rotate(${rand(-90, 90)}deg)`
+  ps.forEach(p => {
+    p.style.position = 'absolute'
+    p.style.top = `${rand(0, 80)}%`
+    p.style.left = `${rand(0, 80)}%`
+    p.style.transform = `rotate(${rand(-90, 90)}deg)`
 
-			  	p.style.color = getRandomColor()
-			  	p.style.fontSize = `${rand(1, 5)}em`
-			})
-		</script>
-	</body>
+    p.style.color = getRandomColor()
+    p.style.fontSize = `${rand(1, 5)}em`
+  })
+</script>
+</body>
 </html>
