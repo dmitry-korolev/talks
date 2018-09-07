@@ -9,7 +9,7 @@
     <title>Stapp</title>
 
     <link rel="stylesheet" href="lib/css/reveal.css">
-    <link rel="stylesheet" href="lib/css/theme/moon.css">
+    <link rel="stylesheet" href="lib/css/theme/tinkoff-dark.css">
 
     <!-- Theme used for syntax highlighting of code -->
     <link rel="stylesheet" href="lib/plugins/prism/night.css">
@@ -27,31 +27,26 @@
 <div class="reveal">
     <div class="slides">
         <section data-disable-header>
-            <h1>Stapp</h1>
-            <p>Модульный менеджмент состояния и сайд-эффектов.</p>
-            <p><a href="https://stapp.js.org">stapp.js.org</a></p>
+            <h1>Основы Javascript</h1>
+            <img
+              style="height: 1.4em; filter: invert(100%);"
+              src="fintech-1/images/tinkoff.png"
+              alt="Tinkoff.ru logo"
+            />
         </section>
-        <section data-title="test title">
-            <h1>Stapp</h1>
-            <p>Модульный менеджмент состояния и сайд-эффектов.</p>
-            <p><a href="https://stapp.js.org">stapp.js.org</a></p>
+        <section data-title="Давайте знакомиться">
+          <img
+            style="height: 6em; border-radius: 100%;"
+            src="fintech-1/images/me.jpg"
+            alt="My photo"
+          />
+          <p style="line-height: 0.7">
+            <small>Дмитрий Королев, разработчик Tinkoff.ru</small><br />
+            <small>email: <a href="mailto:dima@korolev.dk">dima@korolev.dk</a></small><br />
+            <small>github: <a href="https://github.com/dmitry-korolev">/dmitry-korolev</a></small><br />
+            <small>telegram: <a href="https://t.me/dimakorolev">@dimakorolev</a></small>
+          </p>
         </section>
-        <section>
-            <h1>Stapp</h1>
-            <p>Модульный менеджмент состояния и сайд-эффектов.</p>
-            <p><a href="https://stapp.js.org">stapp.js.org</a></p>
-        </section>
-        <section>
-            <h1>Stapp</h1>
-            <p>Модульный менеджмент состояния и сайд-эффектов.</p>
-            <p><a href="https://stapp.js.org">stapp.js.org</a></p>
-        </section>
-        <section>
-            <h1>Stapp</h1>
-            <p>Модульный менеджмент состояния и сайд-эффектов.</p>
-            <p><a href="https://stapp.js.org">stapp.js.org</a></p>
-        </section>
-
     </div>
 </div>
 
@@ -63,19 +58,15 @@
   // - https://github.com/hakimel/reveal.js#configuration
   // - https://github.com/hakimel/reveal.js#dependencies
   Reveal.initialize({
-    controls: true,
+    controls: false,
     controlsTutorial: false,
-    // slideNumber: 'c/t',
+    slideNumber: 'c/t',
     history: true,
     transitionSpeed: 'fast',
     postMessage: true,
     showNotes: document.location.search.indexOf('showNotes=true') >= 0,
     dependencies: [
-      { src: 'lib/plugins/tinkoff-header/index.js', async: true, callback: () => {
-        initHeader({
-          theme: 'dark'
-        })
-      } },
+      { src: 'lib/plugins/tinkoff-header/index.js', async: true },
       { src: 'lib/plugins/notes/notes.js', async: true },
       { src: 'lib/plugins/prism/prism.js', async: true, callback: () => {
           Array.from(document.querySelectorAll('pre code')).forEach(block => {

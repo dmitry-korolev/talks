@@ -7,8 +7,6 @@
   width: 100vw;
   height: 3em;
   padding: 0 1em;
-
-  border-bottom: 3px #ffdd2d solid;
 }
 
 .reveal .header.header--hidden {
@@ -31,7 +29,4 @@
 
 .reveal .header-image {
   height: 1em;
-}
-.reveal .header-image.header-image--dark {
-  filter: invert(100%)
 }
