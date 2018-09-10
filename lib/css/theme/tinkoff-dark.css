@@ -5,6 +5,12 @@
 /*********************************************
  * GLOBAL STYLES
  *********************************************/
+:root {
+  --tinkoff: #ffdd2d;
+  --tinkoff-dark: #e8cb3e;
+}
+
+
 body {
   background: #1c1e20;
   background: radial-gradient(circle at center, #555a5f 0%, #1c1e20 100%);
@@ -20,7 +26,7 @@ body {
 
 ::selection {
   color: #fff;
-  background: #e8cb3e;
+  background: var(--tinkoff-dark);
   text-shadow: none;
 }
 
@@ -166,6 +172,22 @@ body {
   word-wrap: break-word;
 }
 
+.reveal pre.code-small {
+  font-size: 0.4em
+}
+
+.reveal pre.code-large {
+  font-size: 0.7em;
+}
+
+.reveal .code-group {
+  margin: 20px auto;
+}
+
+.reveal .code-group pre {
+  margin: 0 auto;
+}
+
 .reveal code {
   color: #ccc;
   font-family: 'Fira Code', monospace;
@@ -294,7 +316,7 @@ body {
  *********************************************/
 .reveal .progress {
   background: rgba(0, 0, 0, 0.2);
-  color: #ffdd2d;
+  color: var(--tinkoff);
 }
 
 .reveal .progress span {
@@ -304,7 +326,7 @@ body {
 }
 
 /*********************************************
- * PRINT BACKGROUND
+ * PRINT
  *********************************************/
 @media print {
   .backgrounds {
@@ -312,11 +334,21 @@ body {
   }
 }
 
+.reveal.show-notes .speaker-notes-pdf::before {
+  content: "Заметки к слайду";
+}
+
+.reveal.show-notes .speaker-notes-pdf p {
+  font-size: 12px;
+  margin: 0;
+  line-height: 1.1;
+}
+
 /*********************************************
  * HEADER
  *********************************************/
 .reveal .header {
-  border-bottom: 3px #ffdd2d solid;
+  border-bottom: 3px var(--tinkoff) solid;
 }
 
 .reveal .header-image {
@@ -328,4 +360,50 @@ body {
  *********************************************/
  .reveal .slide-number {
   font-size: 1em;
+}
+
+/*********************************************
+ * MERMAID DIAGRAMS
+ *********************************************/
+
+.reveal #diagram .edgePath marker {
+  stroke: var(--tinkoff);
+  fill: var(--tinkoff);
+}
+
+.reveal #diagram .edgePath .path {
+  stroke: var(--tinkoff);
+  stroke-width: 1.5px;
+}
+
+.reveal #diagram .label {
+  font-family: "Roboto", sans-serif;
+  /*transform: translate(0, -10%);*/
+  color: #e2ebeb;
+  font-weight: normal;
+}
+
+.reveal #diagram .node circle,
+.reveal #diagram .node ellipse,
+.reveal #diagram .node polygon,
+.reveal #diagram .node rect {
+  fill: none;
+  stroke: var(--tinkoff)
+}
+
+/*********************************************
+ * IMAGES
+ *********************************************/
+
+.reveal .row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-evenly;
+  max-width: 80%;
+  margin: auto;
+}
+
+.reveal .row.row--around {
+  justify-content: space-around;
 }
