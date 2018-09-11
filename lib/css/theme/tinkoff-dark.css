@@ -365,34 +365,35 @@ body {
 /*********************************************
  * MERMAID DIAGRAMS
  *********************************************/
-
-.reveal #diagram .edgePath marker {
-  stroke: var(--tinkoff);
-  fill: var(--tinkoff);
+.reveal .mermaid-container .edgePath marker {
+  stroke: var(--tinkoff)!important;
+  fill: var(--tinkoff)!important;
 }
 
-.reveal #diagram .edgePath .path {
-  stroke: var(--tinkoff);
-  stroke-width: 1.5px;
+.reveal .mermaid-container .edgePath .path {
+  stroke: var(--tinkoff)!important;
+  stroke-width: 1.5px!important;
 }
 
-.reveal #diagram .label {
-  font-family: "Roboto", sans-serif;
+.reveal .mermaid-container .label {
+  font-family: "Roboto", sans-serif!important;
+  font-size: 12px!important;
+  line-height: 12px!important;
   /*transform: translate(0, -10%);*/
-  color: #e2ebeb;
-  font-weight: normal;
+  color: #e2ebeb!important;
+  font-weight: normal!important;
 }
 
-.reveal #diagram .node circle,
-.reveal #diagram .node ellipse,
-.reveal #diagram .node polygon,
-.reveal #diagram .node rect {
-  fill: none;
-  stroke: var(--tinkoff)
+.reveal .mermaid-container .node circle,
+.reveal .mermaid-container .node ellipse,
+.reveal .mermaid-container .node polygon,
+.reveal .mermaid-container .node rect {
+  fill: #393C40!important;
+  stroke: var(--tinkoff)!important;
 }
 
 /*********************************************
- * IMAGES
+ * GRID
  *********************************************/
 
 .reveal .row {
@@ -406,4 +407,8 @@ body {
 
 .reveal .row.row--around {
   justify-content: space-around;
+}
+
+.reveal .row.row--top {
+  align-items: flex-start;
 }
