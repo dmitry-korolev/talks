@@ -161,46 +161,6 @@ body {
   font-style: italic;
 }
 
-.reveal pre {
-  display: inline-block;
-  position: relative;
-  margin: 20px auto;
-  text-align: left;
-  font-size: 0.55em;
-  font-family: monospace;
-  line-height: 1.2em;
-  word-wrap: break-word;
-}
-
-.reveal pre.code-small {
-  font-size: 0.4em
-}
-
-.reveal pre.code-large {
-  font-size: 0.7em;
-}
-
-.reveal .code-group {
-  margin: 20px auto;
-}
-
-.reveal .code-group pre {
-  margin: 0 auto;
-}
-
-.reveal code {
-  color: #ccc;
-  font-family: 'Fira Code', monospace;
-  text-transform: none;
-}
-
-.reveal pre code {
-  display: block;
-  overflow: auto;
-  max-height: 400px;
-  word-wrap: normal;
-}
-
 .reveal table {
   margin: auto;
   border-collapse: collapse;
@@ -328,21 +288,42 @@ body {
 /*********************************************
  * PRINT
  *********************************************/
-@media print {
-  .backgrounds {
-    background-color: #393C40;
-  }
+.print-pdf .backgrounds {
+  background-color: #393C40;
 }
 
-.reveal.show-notes .speaker-notes-pdf::before {
+.print-pdf .speaker-notes-pdf::before {
   content: "Заметки к слайду";
 }
 
-.reveal.show-notes .speaker-notes-pdf p {
+.print-pdf .speaker-notes-pdf p {
   font-size: 12px;
   margin: 0;
   line-height: 1.1;
 }
+
+.print-pdf .reveal h1 {
+  font-size: 2.5em;
+}
+
+.print-pdf .reveal h2 {
+  font-size: 2em;
+}
+
+.print-pdf .reveal h3 {
+  font-size: 1.3em;
+}
+
+.print-pdf .reveal h4 {
+  font-size: 1em;
+}
+
+.print-pdf .pdf-hidden {
+  display: none;
+  height: 0;
+  width: 0;
+}
+
 
 /*********************************************
  * HEADER
@@ -411,4 +392,52 @@ body {
 
 .reveal .row.row--top {
   align-items: flex-start;
+}
+
+/*********************************************
+ * CODE BLOCKS
+ *********************************************/
+
+.reveal pre {
+  display: inline-block;
+  position: relative;
+  margin: 20px auto;
+  text-align: left;
+  font-size: 0.55em;
+  font-family: monospace;
+  line-height: 1.2em;
+  word-wrap: break-word;
+}
+
+.reveal pre.code--small {
+  font-size: 0.4em
+}
+
+.reveal pre.code--tiny {
+  font-size: 0.3em
+}
+
+.reveal pre.code--large {
+  font-size: 0.7em;
+}
+
+.reveal .code-group {
+  margin: 20px auto;
+}
+
+.reveal .code-group pre {
+  margin: 0 auto;
+}
+
+.reveal code {
+  color: #ccc;
+  font-family: 'Fira Code', monospace;
+  text-transform: none;
+}
+
+.reveal pre code {
+  display: block;
+  overflow: auto;
+  max-height: 400px;
+  word-wrap: normal;
 }
