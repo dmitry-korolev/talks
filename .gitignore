@@ -15,5 +15,8 @@ lib/js/reveal.min.js
 # Private
 rstate/**
 fintech-1/
-fintech-01-intro/
+fintech-01-1-intro/
+fintech-01-2-basics/
+fintech-01-3-git/
+fintech-01-4-gitlab/
 stapp/
