@@ -7,7 +7,9 @@
  *********************************************/
 :root {
   --tinkoff: #ffdd2d;
+  --tinkoff-light: rgb(255, 240, 182);
   --tinkoff-dark: #e8cb3e;
+  --text-color: #e2ebeb;
 }
 
 
@@ -21,7 +23,7 @@ body {
   font-family: "Roboto", sans-serif;
   font-size: 40px;
   font-weight: normal;
-  color: #e2ebeb;
+  color: var(--text-color);
 }
 
 ::selection {
@@ -318,12 +320,13 @@ body {
   font-size: 1em;
 }
 
-.print-pdf .pdf-hidden {
+body:not(.print-pdf) .reveal .pdf-only {
   display: none;
-  height: 0;
-  width: 0;
 }
 
+.print-pdf .reveal .pdf-hide {
+  display: none;
+}
 
 /*********************************************
  * HEADER
@@ -346,9 +349,14 @@ body {
 /*********************************************
  * MERMAID DIAGRAMS
  *********************************************/
-.reveal .mermaid-container .edgePath marker {
+.reveal .mermaid-container marker {
   stroke: var(--tinkoff)!important;
-  fill: var(--tinkoff)!important;
+  fill: black!important;
+}
+
+.marker-arrowhead {
+  stroke: var(--tinkoff)!important;
+  fill: black!important;
 }
 
 .reveal .mermaid-container .edgePath .path {
@@ -356,15 +364,22 @@ body {
   stroke-width: 1.5px!important;
 }
 
+.reveal .mermaid-container svg,
+.reveal .mermaid-container .noteText,
 .reveal .mermaid-container .label {
   font-family: "Roboto", sans-serif!important;
   font-size: 12px!important;
   line-height: 12px!important;
-  /*transform: translate(0, -10%);*/
-  color: #e2ebeb!important;
+  color: var(--text-color)!important;
   font-weight: normal!important;
 }
 
+.reveal .mermaid-container .label {
+  line-height: 10px!important;
+  transform: translate(0, -2px);
+}
+
+.reveal .mermaid-container rect.actor,
 .reveal .mermaid-container .node circle,
 .reveal .mermaid-container .node ellipse,
 .reveal .mermaid-container .node polygon,
@@ -373,6 +388,34 @@ body {
   stroke: var(--tinkoff)!important;
 }
 
+.reveal .mermaid-container text.messageText,
+.reveal .mermaid-container text.actor {
+  fill: var(--text-color)!important;
+  stroke-width: 0;
+}
+
+.reveal .mermaid-container .actor-line {
+  stroke: var(--tinkoff-light)!important;
+}
+
+.reveal .mermaid-container line[class*="messageLine"],
+.reveal .mermaid-container path[class*="messageLine"] {
+  stroke: var(--tinkoff-dark)!important;
+}
+
+.reveal .mermaid-block {
+  margin: 0 0 20px;
+  padding: 0 10px;
+  line-height: 1;
+  border: 2px solid var(--tinkoff-dark)
+}
+
+.reveal .mermaid-block .mermaid-title {
+  color: #ccc;
+  font-family: 'Fira Code', monospace;
+  text-transform: none;
+  font-size: 14px;
+}
 /*********************************************
  * GRID
  *********************************************/
