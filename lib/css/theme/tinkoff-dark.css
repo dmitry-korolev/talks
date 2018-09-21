@@ -74,6 +74,16 @@ body {
   font-size: 1em;
 }
 
+.reveal h5 {
+  font-size: 0.8em;
+  margin: 0 0 10px 0;
+}
+
+.reveal h6 {
+  font-size: 0.6em;
+  margin: 0 0 5px 0;
+}
+
 .reveal h1 {
   text-shadow: none;
 }
@@ -416,6 +426,10 @@ body:not(.print-pdf) .reveal .pdf-only {
   text-transform: none;
   font-size: 14px;
 }
+
+.reveal .cluster rect {
+  fill: rgba(0,0,0, 0.3)!important;
+}
 /*********************************************
  * GRID
  *********************************************/
@@ -483,4 +497,13 @@ body:not(.print-pdf) .reveal .pdf-only {
   overflow: auto;
   max-height: 400px;
   word-wrap: normal;
+}
+
+/*********************************************
+ * TWITTER
+ *********************************************/
+
+/*twitterwidget,*/
+.twitter-tweet {
+  margin: auto;
 }

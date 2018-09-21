@@ -13,7 +13,7 @@ css/reveal.min.css
 lib/js/reveal.min.js
 
 # Private
-rstate/**
+rstate/
 fintech-1/
 fintech-01-1-intro/
 fintech-01-2-basics/
