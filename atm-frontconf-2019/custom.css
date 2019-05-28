@@ -1,0 +1,42 @@
+body:after {
+    content: '';
+    display: block;
+    background: url('./images/logos/fc.png');
+    background-size: cover;
+    height: 50px;
+    width: 50px;
+    position: absolute;
+    z-index: 999;
+    bottom: 8px;
+    right: 8px;
+}
+
+.index-slide .slide-number {
+    display: none!important;
+}
+
+.reveal .header {
+    border-bottom: none!important;
+}
+
+.reveal .heading-main {
+    color: black;
+    text-align: left;
+    text-transform: none;
+    font-size: 2.5em;
+    line-height: 1;
+}
+
+.reveal .subheading-main {
+    color: black;
+    text-align: left;
+    text-transform: none;
+    font-size: 1.2em;
+}
+
+.reveal .fc-main-logo {
+    height: 2em;
+    float: left;
+    margin: 3em 0 0;
+}
+

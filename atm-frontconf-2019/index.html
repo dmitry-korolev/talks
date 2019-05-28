@@ -1,0 +1,1162 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+  <base href="../" />
+
+  <title>Разработка UI для банкоматов</title>
+
+  <link rel="stylesheet" href="/lib/css/reveal.css">
+  <link rel="stylesheet" href="/lib/css/theme/tinkoff-dark.css">
+  <link rel="stylesheet" href="/atm-frontconf-2019/custom.css">
+
+  <!-- Theme used for syntax highlighting of code -->
+  <link rel="stylesheet" href="/lib/plugins/prism/night.css">
+
+  <!-- Printing and PDF exports -->
+  <script>
+    const printMode = window.location.search.match(/print-pdf/gi)
+    const link = document.createElement('link')
+    link.rel = 'stylesheet'
+    link.type = 'text/css'
+    link.href = printMode ? 'lib/css/print/pdf.css' : 'lib/css/print/paper.css'
+    document.getElementsByTagName('head')[0].appendChild(link)
+  </script>
+</head>
+<body>
+<div class="reveal">
+  <div class="slides">
+    <section
+      data-disable-header
+      data-background-image="/atm-frontconf-2019/images/bg-main.png"
+      data-state="index-slide"
+    >
+      <h1 class="heading-main" data-dinasize-ignore>Разработка UI для&nbsp;банкоматов</h1>
+      <h2 class="subheading-main">Дима Королев, Tinkoff.ru</h2>
+      <img
+        class="fc-main-logo"
+        src="/atm-frontconf-2019/images/fc-logo.png"
+        alt="Tinkoff.ru logo"
+      />
+    </section>
+
+    <section
+      data-logo-inverted
+    >
+      <h1>Зачем?</h1>
+      <ul>
+        <li class="fragment">Самоинкассация для SME</li>
+        <li class="fragment">Рост оборота наличности</li>
+        <li class="fragment">Экономия на комиссиях</li>
+        <li class="fragment">Новые каналы связи с клиентами</li>
+      </ul>
+
+      <aside class="notes" data-note-markdown>
+        Пару слов о том, почему вообще крупнейший онлайн-банк в мире, гордящийся отсутствием офисов, решил делать банкоматы.
+
+        Я бы не стал об этом говорить, но причины понимать важно, потому что из них вытекают требования.
+
+        На самом деле причин много, это и появление продуктов для малого и среднего бизнеса, что означает необходимость
+        сервиса инкассации, которую предпринимателям удобно проводить самостоятельно через банкоматы, а так же
+        растущие объемы снимаемой наличности из-за зарплатных проектов.
+
+        Наличие у банка собственных банкоматов позволяет ему экономить на комиссиях, которые приходится платить
+        сторонним банкам за использование их банкоматов.
+
+        К другим причинам можно отнести потребность в новых каналах связи с клиентами
+      </aside>
+    </section>
+
+    <section
+      data-logo-inverted
+    >
+      <h2>Имиджевая тема</h2>
+
+      <aside class="notes" data-note-markdown>
+        Но на мой взгляд, главная причина — это то, что мы у себя называем имиджевой темой. Собственные банкоматы,
+        красивые, удобные — это и дополнительная реклама банку, и некий показатель надежности для существующих
+        и потенциальных клиентов.
+      </aside>
+    </section>
+
+    <section
+      data-logo-inverted
+    >
+      <h1>Требования</h1>
+
+      <ul>
+        <li class="fragment">Лучший в мире</li>
+        <li class="fragment">Быстрая разработка</li>
+        <li class="fragment">Быстрые релизы</li>
+      </ul>
+
+      <aside class="notes" data-note-markdown>
+        (возможно, стоит разделить на несколько слайдов)
+
+        Из этого вытекает главное требование к банкомату.
+
+        Он должен быть лучшим. Он должен быть самым удобным, самым отзывчивым, самым
+        комфортным в использовании банкоматом в мире.
+
+        Для того, чтобы быть на острие, мы должны уметь быстро внедрять новую уникальную
+        функциональность и дорабатывать старую.
+
+        Наконец, мы должны уметь быстро доставлять новые версии приложения на банкоматы, иначе толку от нашей
+        скорости разработки.
+      </aside>
+    </section>
+
+    <section
+      data-title=""
+      data-logo-inverted
+    >
+      <h2>Почему не стандартный банкомат?</h2>
+
+      <aside class="notes" data-note-markdown>
+        Исходя из этого, мы не могли позволить себе использовать "обычные" банкоматы — с небольшими экранами, с кнопками
+        по боками, с устаревшими сценариями использования.
+      </aside>
+    </section>
+
+    <section
+      data-title=""
+      data-background-image="/atm-frontconf-2019/images/old-atm.jpg"
+      data-logo-inverted
+    >
+      <aside class="notes" data-note-markdown>
+        Потому что стандартные банкоматы в нашем представлении выглядят так — это пережиток прошлого, и мы такого не хотим.
+      </aside>
+    </section>
+
+    <section
+      data-title=""
+      data-logo-inverted
+      data-background-image="/atm-frontconf-2019/images/reptiloid.jpg"
+    >
+      <aside class="notes" data-note-markdown>
+        Мы хотели, чтобы наши банкоматы вызывали исключительно положительные эмоции.
+      </aside>
+    </section>
+
+    <section
+      data-title="Выбор №1: GUI"
+      data-logo-inverted
+    >
+      <h1>Что использовать для&nbsp;GUI?</h1>
+      <div class="row">
+        <ul>
+          <li class="fragment">WPF?</li>
+          <li class="fragment">MFC?</li>
+        </ul>
+        <ul>
+          <li class="fragment">Qt?</li>
+          <li class="fragment">Web?</li>
+        </ul>
+      </div>
+
+      <aside class="notes" data-note-markdown>
+        Первый выбор, перед которым мы встали — на чем, собственно, писать интерфейс банкомата?
+        Несмотря на то, что банкоматная сфера очень консервативная, выбор на самом деле
+        довольно-таки большой, и почти ничем не ограничен. Насколько мне известно, интерфейсы для
+        банкоматов пишут на чем угодно — практически на всём, что вообще может использоваться
+        для написания GUI.
+      </aside>
+    </section>
+
+    <section
+      data-title="Выбор №1: GUI"
+      data-logo-inverted
+      data-background-image="/atm-frontconf-2019/images/atms/atms.png"
+    >
+      <div style="width: 50%; text-align: left; float: left">
+        <h3>Разные устройства</h3>
+        <p>Четыре модели банкоматов и одна терминала с разным поведением и устройствами.</p>
+      </div>
+
+      <aside class="notes" data-note-markdown>
+        Нужно было выбрать наиболее универсальное решение — мы предполагали,
+        что одним банкоматом дело не ограничится, и так и вышло — сейчас у нас
+        4 разных модели банкоматов и терминалов, а в скором времени добавятся еще.
+      </aside>
+    </section>
+
+    <section
+      data-title="Выбор №1: GUI"
+      data-logo-inverted
+      data-background-image="/atm-frontconf-2019/images/atms/tall.png"
+    >
+      <div style="width: 50%; text-align: left; float: left">
+        <h3>Разные устройства</h3>
+        <p>Четыре модели банкоматов и одна терминала с разным поведением и устройствами.</p>
+      </div>
+
+      <aside class="notes" data-note-markdown>
+        Сейчас у нас пять моделей от трех производителей. У всех разное поведение, набор периферийных устройств и каждое —
+        со своим характером.
+      </aside>
+    </section>
+
+    <section
+      data-title="Выбор №1: GUI"
+      data-logo-inverted
+    >
+      <h1>Web application</h1>
+      <ul>
+        <li>Гибкое и универсальное решение</li>
+        <li>Уже есть экспертиза</li>
+      </ul>
+
+      <aside class="notes" data-note-markdown>
+        Что мы в итоге выбрали, легко можно догаться по тому, в какой секции находится мой доклад.
+
+        Мы выбрали веб как наиболее отвечающее нашим запросам решение. Дополнительно в пользу этого решения
+        говорило наличие большой экспертизы в написании веб-приложений и полное отсутствие опыта
+        в написании приложений для десктопа.
+      </aside>
+    </section>
+
+    <section
+      data-title="Выбор №1: GUI"
+      data-logo-inverted
+    >
+
+      <img src="/atm-frontconf-2019/images/schemes/asu.png" style="height: 6em;" alt="">
+
+      <aside class="notes" data-note-markdown>
+        Я не буду подробно останавливаться на технической реализации. Если коротко, за всё отвечает
+        локальный сервер, обеспечивающий связь между запущенным на нём веб-приложением и железом банкомата.
+      </aside>
+    </section>
+
+    <section
+      data-title="Выбор №2: фреймворк"
+      data-logo-inverted
+    >
+      <h1>Какой выбрать фреймворк?</h1>
+      <ul>
+        <li class="fragment">React?</li>
+        <li class="fragment">Angular?</li>
+      </ul>
+
+      <aside class="notes" data-note-markdown>
+        Следующий шаг — решить, на чем мы будем делать веб-приложение.
+
+        Нужно сказать, что на тот момент в банке основными были два стека — один на основе React и второй
+        на основе Angular. Сейчас появились и другие, но эти два по-прежнему доминируют.
+      </aside>
+    </section>
+
+    <section
+      data-title="Выбор №2: фреймворк"
+      data-background-image="/atm-frontconf-2019/images/screens/chrome23.png"
+      data-background-position="top"
+      data-logo-inverted
+    >
+      <div style="width: 50%; text-align: left; float: left">
+        <h3>Устаревший Chromium</h3>
+        <ul>
+          <li class="fragment">Невозможный дебаг</li>
+          <li class="fragment">Странные баги из-за кастомизации</li>
+        </ul>
+      </div>
+
+      <aside class="notes" data-note-markdown>
+        По идее, выбирая фреймворк, нам нужно было отталкиваться от особенностей окружения, в котором
+        пришлось бы работать приложению.
+
+        Например, учитывать, что в качестве браузера использовался Chromium 23-й версии.
+
+        Это не так страшно, как 9 IE, но быть ограниченным браузером на тот момент
+        пятилетней выдержки - тоже такое себе удовольствие. В частности, были большие сложности с дебагом.
+
+        Кроме того, это изрядно кастомизированный chromium, что тоже иногда вызывало странные баги.
+
+        Часто мы часами искали ошибку только для того, чтобы понять, что проблема была в каких-то несовместимых
+        друг с другом библиотеках, а вовсе не в UI-приложении.
+      </aside>
+    </section>
+
+    <section
+      data-title="Выбор №2: фреймворк"
+      data-logo-inverted
+    >
+      <h2>Утечки</h2>
+      <p>Приложение работает постоянно — высокий риск появления утечек памяти.</p>
+
+      <aside class="notes" data-note-markdown>
+        Нужно было учитывать, что приложение будет работать постоянно, в течение дней и
+        даже недель без перезапуска — вероятно, это одно из основных различий между приложением,
+        запущенным на банкомате, и приложением, запущенным в браузере клиента.
+
+        Даже незначительная утечка памяти за то время, пока работает банкомат,
+        может привести к тормозами и падениям. А из-за уже упомянутых проблем с дебагом,
+        отследить эти утечки удавалось с огромным трудом, как и вообще понять, что
+        терминал падает именно из-за утечки памяти в веб-приложении.
+      </aside>
+    </section>
+
+    <section
+      data-title="Выбор №2: фреймворк"
+      data-logo-inverted
+    >
+      <h2>API</h2>
+      <p>Построенный на событиях API для взаимодействия с ATM</p>
+
+      <aside class="notes" data-note-markdown>
+        Наконец, API для взаимодействия с банкоматом. Главная его особенность — он построен на событиях.
+        И это тоже нужно было учитывать, но об этом немного позже.
+      </aside>
+    </section>
+
+    <section
+      data-title="Выбор №2: фреймворк"
+      data-logo-inverted
+    >
+      <img src="/atm-frontconf-2019/images/rainbow.png" alt="" style="height: 5em;">
+
+      <aside class="notes" data-note-markdown>
+        Раз уж я заговорил об окружении, то стоит добавить немного
+        о положительных моментах, они тоже, разумеется, были.
+      </aside>
+    </section>
+
+    <section
+      data-title="Выбор №2: фреймворк"
+      data-logo-inverted
+    >
+      <h2>Одинаковые клиенты</h2>
+      <p>Ограниченный набор разрешений экрана и одинаковые интерфейсы взаимодействия с клиентом</p>
+
+      <aside class="notes" data-note-markdown>
+        Да, у нас несколько моделей банкоматов, но с точки зрения верстки ограниченное количество
+        разрешений экрана значительно облегчает работу. Не нужно думать о резиновой верстке, адаптивности.
+
+        У всех банкоматов — одинаковые, заранее известные методы взаимодействия с пользователем.
+        Никаких скринридеров, мобильных устройств, никакого accessibility, по сути всё взаимодействие
+        с интерфейсом ограничивается тачскрином и пинпадом.
+      </aside>
+    </section>
+
+    <section
+      data-title="Выбор №2: фреймворк"
+      data-logo-inverted
+    >
+      <h2>Универсальное и одинаковое ПО</h2>
+
+      <aside class="notes" data-note-markdown>
+        На всех банкоматах одинаковые версии ПО, включая операционную систему, управляющее ПО терминала и браузер.
+
+        Обновления происходят централизованно и одновременно. Это помогает разрабатывать в максимально
+        приближённых к реальности условиях.
+      </aside>
+    </section>
+
+    <section
+      data-title="Выбор №2: фреймворк"
+      data-logo-inverted
+    >
+      <h2>Современная аппаратная основа</h2>
+
+      <aside class="notes"  data-note-markdown>
+        Все устройства оснащены одинаково - и довольно-таки производительным железом.
+        То есть нет особой необходимости думать о какой бы то ни было оптимизации.
+      </aside>
+    </section>
+
+    <section
+      data-title="Выбор №2: фреймворк"
+      data-logo-inverted
+    >
+      <h2>Клиентский рендер</h2>
+      <aside class="notes"  data-note-markdown>
+        Еще одна головная боль, от которой мы были полностью избавлены - это
+        необходимость делать SSR. Во многом это развязывает руки при выборе инструментов для разработки.
+      </aside>
+    </section>
+
+    <section
+      data-title="Выбор №2: фреймворк"
+      data-logo-inverted
+    >
+      <img src="/atm-frontconf-2019/images/gifs/coinflip.webp" style="height: 10em;" alt="">
+
+      <aside class="notes" data-note-markdown>
+        В итоге выбор был сделан довольно-таки безответственно. Мы выбрали то, что было ближе непосредственно
+        нам — команде, начинавшей разработку интерфейса.
+      </aside>
+    </section>
+
+    <section
+      data-title="Выбор №2: фреймворк"
+      data-logo-inverted
+    >
+      <img src="/atm-frontconf-2019/images/logos/react.png" alt="" style="height: 5em;">
+      <h4>React</h4>
+
+      <aside class="notes" data-note-markdown>
+        И так вышло, что это был реакт. Был ли это хороший выбор? Посмотрим дальше.
+      </aside>
+    </section>
+
+    <section
+      data-title="Выбор №3: организация CSS"
+      data-logo-inverted
+    >
+      <h1>Как работаем с CSS?</h1>
+      <div class="row">
+        <ul>
+          <li class="fragment">Static CSS?</li>
+          <li class="fragment">Sass/less?</li>
+        </ul>
+        <ul>
+          <li class="fragment">CSS-модули?</li>
+          <li class="fragment">CSS-in-JS?</li>
+        </ul>
+      </div>
+
+      <aside class="notes" data-note-markdown>
+        В какой-то момент встал выбор организации работы с CSS. Статический CSS, пусть даже с препроцессорами
+        или postcss — это, конечно, просто и надежно, но где же веселье?
+      </aside>
+    </section>
+
+    <section
+      data-title="Выбор №3: организация CSS"
+      data-logo-inverted
+    >
+      <img src="/atm-frontconf-2019/images/gifs/freedom.gif" style="height: 10em;" alt="">
+
+      <aside class="notes" data-note-markdown>
+        Тут у нас была полная свобода действий. Как я уже говорил раньше, рендер только клиентский,
+        ограничений по производительности нет, единственное, что нужно было учитывать —
+        это устаревший браузер, но вроде бы особых проблем с ним не возникло.
+      </aside>
+    </section>
+
+    <section
+      data-title="Выбор №3: организация CSS"
+      data-logo-inverted
+    >
+      <img src="/atm-frontconf-2019/images/logos/emotion-logo.png" alt="" style="height: 5em;">
+      <h4>Emotion</h4>
+      <aside class="notes" data-note-markdown>
+        И мы решили попробовать emotion, хотя с тем же успехом могли бы взять
+        styled-components).
+
+        И, нужно заметить, в наших условиях плюсы подхода css-in-js перевесили минусы.
+      </aside>
+    </section>
+
+    <section
+      data-title="Выбор №3: организация CSS"
+      data-logo-inverted
+    >
+      <h2>Плюсы</h2>
+      <ul>
+        <li class="fragment">Компонентный подход</li>
+        <li class="fragment">Изоляция стилей</li>
+        <li class="fragment">Динамика</li>
+      </ul>
+
+      <aside class="notes">
+        Удобное деление на компоненты, изоляция стилей из коробки, динамические стили, вроде ничего фантастического,
+        но на платформе Tinkoff.ru мы до этого год сидели на less и css-модулях, в которых всё это делается
+        с чуть-чуть большим геморроем, и возможности, которые дал нам css-in-js, показались нам
+        безграничными.
+
+        Разумеется, все эти плюсы можно реализовать и в более традиционных подходах, но зачем?
+      </aside>
+    </section>
+
+    <section
+      data-title="Выбор №3: организация CSS"
+      data-logo-inverted
+    >
+      <h2>Минусы</h2>
+      <ul>
+        <li class="fragment">Отсутствие статики</li>
+        <li class="fragment">Раздувание JS</li>
+        <li class="fragment">Медленней, чем CSS</li>
+      </ul>
+
+      <aside class="notes" data-note-markdown>
+        Минусы тоже есть, разумеется. Какие-то - специфические для конкретных библиотек, какие-то общие для всех.
+
+        У каких-то библиотек есть проблемы с сервер-сайдом и выделением CSS в отдельный статический файл.
+
+        Общая для всех (за редким исключением) CSS-in-JS библиотек проблема - необходимость тащить какой-то js в рантайм.
+
+        Следствие предыдущих двух пунктов — разумеется, любой подход предполагающий динамическую
+        генерацию стилей в JS будет рабоать по определению медленней, чем статический CSS.
+
+        Все эти минусы, как я уже говорил, для нас роли не играли, и в общем-то мы не жалеем о своем выборе.
+      </aside>
+    </section>
+
+    <section
+      data-title="Выбор №4: управление состоянием"
+      data-logo-inverted
+    >
+      <h1>Как управлять состоянием?</h1>
+      <ul>
+        <li class="fragment">Redux?</li>
+        <li class="fragment">Mobx?</li>
+      </ul>
+
+      <aside class="notes" data-note-markdown>
+        Следующий вопрос: как управлять состоянием? (здесь шутка про эффектор)
+
+        Выбрать иммутабельность и однонаправленный поток данных, предлагаемые редаксом?
+        Или реактивный подход, предлагаемый mobx?
+      </aside>
+    </section>
+
+    <section
+      data-title="Выбор №4: управление состоянием"
+      data-logo-inverted
+    >
+      <img src="/atm-frontconf-2019/images/gifs/nobody.webp" style="height: 10em;" alt="">
+
+      <aside class="notes" data-note-markdown>
+        Да какая вообще разница?
+      </aside>
+    </section>
+
+    <section
+      data-title="Выбор №4: управление состоянием"
+      data-logo-inverted
+    >
+      <img src="/atm-frontconf-2019/images/logos/redux.png" alt="" style="height: 5em;">
+      <h4>Redux</h4>
+
+      <aside class="notes" data-note-markdown>
+        Исключительно по привычке остановились на первом варианте, и всё бы ничего,
+        если бы после этого мы не совершили радикальную ошибку.
+      </aside>
+    </section>
+
+    <section
+      data-title="Выбор №5: сайд-эффекты"
+      data-logo-inverted
+    >
+      <h1>Как общаться с API?</h1>
+      <ul>
+        <li class="fragment">redux-thunk?</li>
+        <li class="fragment">redux-saga?</li>
+        <li class="fragment">redux-observable?</li>
+      </ul>
+
+      <aside class="notes" data-note-markdown>
+        Нам нужно было понять, как управлять сайд-эффектами.
+
+        Обычно в мире redux выбор происходит между тремя китами.
+        Это redux-thunk — примитивнейшая, крайне простая в использовании, библиотека.
+        Redux-saga — уже не такая простая библиотека, построенная на генераторах и
+        redux-observable — библиотека, построенная на rxjs.
+
+        С последними двумя мы были незнакомы, поэтому решили остановиться на
+      </aside>
+    </section>
+
+    <section
+      data-title="Выбор №5: сайд-эффекты"
+      data-logo-inverted
+    >
+      <h1>Redux-thunk</h1>
+
+      <aside class="notes" data-note-markdown>
+
+      </aside>
+    </section>
+
+    <section
+      data-title="Выбор №5: сайд-эффекты"
+      data-logo-inverted
+    >
+      <img src="/atm-frontconf-2019/images/gifs/disaster.webp" style="height: 10em;" alt="">
+
+      <aside class="notes" data-note-markdown>
+        И это была катастрофа. Катастрофа, от последствий которой мы до сих пор не можем полностью оправиться.
+        Но для того, чтобы понять, почему она произошла, нужно подробнее рассказать о том, как устроено API
+        банкомата.
+      </aside>
+    </section>
+
+    <section
+      data-title="Выбор №5: сайд-эффекты"
+      data-logo-inverted
+    >
+      <h2>API</h2>
+      <p>Построенный на событиях API для взаимодействия с ATM</p>
+      <p class="fragment"><small>(простите за повтор)</small></p>
+
+      <aside class="notes" data-note-markdown>
+        Если помните, я говорил, что API, с помощью которого приложение общается с ПО банкомата,
+        построено на событиях. О чем я не сказал — так это о количестве этих событий.
+      </aside>
+    </section>
+
+    <section
+      data-title="Выбор №5: сайд-эффекты"
+      data-logo-inverted
+    >
+      <img src="/atm-frontconf-2019/images/schemes/events.png" alt="" style="height: 10em;">
+
+      <aside class="notes" data-note-markdown>
+        А их — больше сотни, и каждый сценарий взаимодействия клиента с терминалом включает в себя необходимость
+        подписки на десятки различных событий.
+      </aside>
+    </section>
+
+    <section
+      data-title="Выбор №5: сайд-эффекты"
+      data-background-image="/atm-frontconf-2019/images/payment-cash.png"
+    >
+      <div style="width: 50%; text-align: left; float: left">
+        <h4>Сценарий "Платеж наличными":</h4>
+        <ul>
+          <li>8 событий сценария</li>
+          <li>11 асинхронных запросов</li>
+          <li>События ввода</li>
+          <li>События ошибок</li>
+        </ul>
+      </div>
+
+      <aside class="notes" data-note-markdown>
+        Например, сценарий "платеж наличными", один из самых простых сценариев, включает
+        в себя помимо событий ошибок и пользовательского ввода, например, нажатия на пинпад или кнопку отмены,
+        присутствующих в каждом сценарии, еще 8 собственных событий и необходимость делать до 11 асинхронных
+        запросов.
+
+        И мы честно пытались управлять этой какофонией через асинхронные экшены redux-thunk, при этом
+        непосредственно подписки на события приходилось хранить в страничных компонентах, потому что
+        больше было негде.
+      </aside>
+    </section>
+
+    <section
+      data-title="Выбор №5: сайд-эффекты"
+      data-logo-inverted
+    >
+      <h2>Сильное зацепление</h2>
+      <ul>
+        <li class="fragment">Сломали переиспользование</li>
+        <li class="fragment">Сломали тестирование</li>
+      </ul>
+
+      <aside class="notes" data-note-markdown>
+        В результате мы нарушили одно из главных правил: не связывать логику и представление.
+        Мы получили сильнейшее зацепление, вырыв самим себе яму: лишили себя возможности
+        переиспользовать модули, лишили себя возможности автономно тестировать логику.
+      </aside>
+    </section>
+
+    <section
+      data-title="Выбор №5: сайд-эффекты"
+      data-logo-inverted
+    >
+      <img src="/atm-frontconf-2019/images/gifs/chaos.webp" style="height: 10em;" alt="">
+
+      <aside class="notes" data-note-markdown>
+        Буквально через пару месяцев после начала разработки, мы получили тотальный хаос.
+      </aside>
+    </section>
+
+    <section
+      data-title="Выбор №5: сайд-эффекты"
+      data-logo-inverted
+    >
+      <h2>Redux-saga vs.<br/>redux-observable</h2>
+
+      <aside class="notes">
+        Нужно было срочно что-то делать и выбирать решение, которое позволило бы исправить наши
+        ошибки. Я уже говорил, что помимо redux-thunk, для управления асинхронными процессами в
+        redux часто используются redux-observable на стримах и redux-saga на генераторах.
+      </aside>
+    </section>
+
+    <section
+      data-title="Выбор №5: сайд-эффекты"
+      data-logo-inverted
+    >
+      <div class="row">
+        <div>
+          <img src="/atm-frontconf-2019/images/logos/rxjs-logo.png" alt="" style="height: 5em;">
+          <h4>RxJS</h4>
+        </div>
+        <div>
+          <img src="/atm-frontconf-2019/images/logos/redux-observable-logo.png" alt="" style="height: 5em;">
+          <h4>redux-observable</h4>
+        </div>
+      </div>
+
+      <aside class="notes" data-note-markdown="">
+        Мы выбрали первый, во многом потому что потоки для нас оказались гораздо более универсальным решением,
+        чем генераторы.
+
+        Кроме того, на платформе tinkoff.ru уже был опыт в использовании RxJS и при необходимости мы могли бы
+        воспользоваться существующей экспертизой. В случае с генераторами нам пришлось бы стать едва ли
+        не первопроходцами.
+      </aside>
+    </section>
+
+    <section
+      data-title="Выбор №5: сайд-эффекты"
+      data-logo-inverted
+    >
+      <img src="/atm-frontconf-2019/images/schemes/epics.png" alt="" style="height: 10em;">
+
+      <aside class="notes" data-note-markdown="">
+        Благодаря RxJS и redux-observable мы получили возможность в одном сценарии объединять
+        логику, завязанную на изменения стора, экшены редакса и события терминала,
+        и это показало себя как крайне удобное решение.
+      </aside>
+    </section>
+
+    <section
+      data-title="Выбор №5: сайд-эффекты"
+      data-logo-inverted
+    >
+      <h2>Понятность и управляемость</h2>
+      <aside class="notes" data-note-markdown="">
+        Этот подход сделал главное: сценарии стали понятны. Логика, которая раньше была разбросана
+        по нескольким компонентам, теперь была сосредоточена в одном потоке и стала полностью независима от view.
+
+        К примеру, процесс авторизации, который завязан на 8 разных типов событий, четыре асинхронных запроса
+        и два синхронных, имеет кучу ветвлений и условий, теперь умещается буквально на пяти десятках строк.
+      </aside>
+    </section>
+
+    <section
+      data-title="Выбор №5: сайд-эффекты"
+      data-logo-inverted
+    >
+      <h2>Минусы</h2>
+      <ul>
+        <li class="fragment">Сложнее дебаггинг и тестирование</li>
+        <li class="fragment">Потоки сложны для понимания</li>
+      </ul>
+      <aside class="notes" data-note-markdown="">
+        Свои минусы у RxJS тоже есть.
+
+        Во-первых, потоки довольно-таки сложно дебажить и тестировать, и если последнее можно решить
+        за счет грамотного dependency injection, то с дебагом приходилось мучиться, и эту
+        проблему мы до конца не решили.
+
+        Во-вторых, в потоки нужно вкатываться. Само по себе реактивное программирование может быть не сразу понятно.
+        Но, как показывает практика, это не становится проблемой. Кроме того, как опять же показывает практика,
+        реактивное программирование весьма универсально, и находит широкое применение в вебе, поэтому знания RxJS
+        пригодятся всегда.
+      </aside>
+    </section>
+
+    <section
+      data-title="Выбор №6: переезд на TS"
+      data-logo-inverted
+    >
+      <img src="/atm-frontconf-2019/images/logos/ts-logo.png" alt="" style="height: 5em;">
+      <h4>Typescript</h4>
+
+      <aside class="notes" data-note-markdown="">
+        Попутно мы переехали на typescript.
+
+        С его помощью мы хотели, во-первых, облегчить общение с API банкомата —
+        оказалось очень удобным один раз описать интерфейсы всех событий и асинхронных
+        методов и перестать постоянно лазать по документации.
+
+        Еще одна надежда — уменьшить количество ошибок и багов, не была оправдана,
+        потому как большая часть проблем вызывалась сложной бизнес-логикой, а не
+        отсутствием строгой типизации.
+
+        Тем не менее, работать стало удобнее, и отказываться от TS мы не спешим.
+      </aside>
+    </section>
+
+    <section
+      data-title="Выбор №7: тестирование"
+      data-logo-inverted
+    >
+      <h1>Как будем тестировать?</h1>
+      <ul>
+        <li class="fragment">Юнит-тесты?</li>
+        <li class="fragment">Модульные тесты?</li>
+        <li class="fragment">E2E-тесты?</li>
+      </ul>
+
+      <aside class="notes" data-note-markdown>
+        Кстати, про снижение количества багов. Поговорим про тестирование.
+        У нас в полном объеме проводится ручное тестирование, но где же
+        веселье? Хочется ведь чтобы всё как у взрослых — грамотная пирамида тестирования
+        из юнит-тестов, модульных тестов, end-to-end тестов, чтобы нажал на одну кнопку,
+        и всё зарелизилось, и вот это всё.
+
+        Так как мы тестируем?
+      </aside>
+    </section>
+
+    <section
+      data-logo-inverted
+      data-background-image="/atm-frontconf-2019/images/atms/hidden.jpg"
+    >
+
+      <pre class="code--large"><code class="language-js"><!--
+
+      --></code></pre>
+
+      <aside class="notes" data-note-markdown>
+
+      </aside>
+    </section>
+
+    <section
+      data-title="Выбор №7: тестирование"
+      data-logo-inverted
+    >
+      <h2>Сложный эмулятор</h2>
+
+      <aside class="notes" data-note-markdown>
+        Понятное дело, мы не могли разрабатывать непосредственно на банкомате, это было бы
+        весьма затруднительно. Поэтому у нас был эмулятор. Он, как и сами банкоматы, работает
+        только на windows, и представляет собой набор эмуляторов различных устройств.
+      </aside>
+    </section>
+
+    <section
+      data-logo-inverted
+      data-background-image="/atm-frontconf-2019/images/screens/emulator.png"
+    >
+      <aside class="notes" data-note-markdown>
+        Выглядит это примерно так.
+
+        Основная его проблема — в некоторых отличиях в поведении. Это проявлялось в первую очередь в работе с устройствами.
+
+        Например, в реальной жизни для того, чтобы выдать или принять наличность, банкомату требуется время,
+        а эмулятор это не учитывал.
+      </aside>
+    </section>
+
+    <section
+      data-title="Выбор №7: тестирование"
+      data-logo-inverted
+    >
+      <h2>Закон Мёрфи</h2>
+      <p class="fragment">Всё, что может пойти не так, пойдет не так</p>
+
+      <aside class="notes" data-note-markdown>
+        Есть и еще одна проблема, которая еще больше усложняет работу, и тестирование в частности.
+      </aside>
+    </section>
+
+    <section
+      data-title="Выбор №7: тестирование"
+      data-logo-inverted
+    >
+
+      <img src="/atm-frontconf-2019/images/insert-card.gif" style="height: 12em;" alt="">
+
+      <aside class="notes" data-note-markdown>
+        Кажется, эта гифка отлично иллюстрирует происходящее — причем как внезапное странное поведение
+        банкомата, так и внезапное очень странное поведение клиента.
+      </aside>
+    </section>
+
+    <section
+      data-title=""
+      data-background-image="/atm-frontconf-2019/images/atms/cash.jpg"
+    >
+      <aside class="notes" data-note-markdown>
+        Если говорить об историях, более приближенных к реальности, вот вам целых две, связанных
+        со вносом наличности, причем регулярно повторяющиеся.
+
+        На фотографии вы видите купюроприемник. Как вы думаете, что нужно сделать, чтобы положить туда деньги?
+        Правильно, дождаться, когда он откроется.
+
+        Но зачем? Мы постоянно сталкиваемся с ситуацией, когда клиент пытается запихнуть купюру прямо в щель
+        между корпусом и крышкой купюроприемника.
+
+        Еще один вариант — дождаться, когда шаттер откроется, исходя из каких-то внутренних убеждений нажать
+        на кнопку возврата на экране или отмены на пинпаде, и успеть закинуть деньги в купюроприёмник до того,
+        как он закроется.
+
+        Как эти ситуации обходить? Как автоматизировать?
+      </aside>
+    </section>
+
+    <section
+      data-title="Выбор №7: тестирование"
+      data-logo-inverted
+    >
+      <div class="game"></div>
+
+      <aside class="notes" data-note-markdown>
+        Ну, если совсем коротко — никак. Но не торопитесь нас шеймить. У нас есть оправдания!
+        На самом деле мы пытаемся, но есть объективные препятствия.
+        Как я уже говорил, основная сложность нашего приложения — в бизнес-логике. Это банкомат,
+        там нет каких-то сложных интерфейсных элементов, нет сложных трансформаций данных,
+        и это всё легко покрыть тестами, но толку от этого мало.
+
+        Тестами нужно покрывать бизнес-логику, но писать на неё юниты — огромная боль,
+        и колоссальные траты времени, которые невозможно оправдать перед бизнесом,
+        мы пытались.
+
+        Есть надежда на автотесты, но прежде, чем перейти к ним, нужно рассказать о том,
+        как устроен эмулятор.
+      </aside>
+    </section>
+
+    <section
+      data-title="Выбор №7: тестирование"
+      data-logo-inverted
+    >
+      <div class="row">
+        <div>
+          <img src="/atm-frontconf-2019/images/logos/selenium.png" alt="" style="height: 5em;">
+          <h4>Selenium</h4>
+        </div>
+        <div>
+          <img src="/atm-frontconf-2019/images/logos/autoit-logo.png" alt="" style="height: 5em;">
+          <h4>autoit</h4>
+        </div>
+      </div>
+
+      <aside class="notes" data-note-markdown>
+        ...если кому интересно, на Selenium с использованием AutoIt для взаимодействия с интерфейсом.
+        Но бизнесу это тоже не очень интересно, потому что текущая скорость доставки новых
+        версий на прод вполне его устраивает.
+
+        Если интересно, в случае необходимости процесс выкладки новой версии на все банкоматы включая
+        регресс и доставку может уложиться в 1 день. Если прям с утреца начать, конечно.
+      </aside>
+    </section>
+
+    <section
+      data-title=""
+      data-logo-inverted
+    >
+      <h1>Итоги</h1>
+
+      <aside class="notes" data-note-markdown>
+        Давайте подведем небольшие итоги. Что мы имеем сейчас.
+      </aside>
+    </section>
+
+    <section
+      data-title="Итоги"
+      data-logo-inverted
+    >
+      <h2>Контроль над поведением ATM</h2>
+      <aside class="notes">
+        Во многом благодаря RxJS у разработчиков есть полный контроль над происходящим.
+
+        Каждый сценарий понятен и сравнительно легко может быть расширен или вовсе
+        переписан при необходмости на использование других событий, методов API и так далее.
+      </aside>
+    </section>
+
+    <section
+      data-title="Итоги"
+      data-logo-inverted
+    >
+      <h2>Стабильная и быстрая разработка</h2>
+
+      <aside class="notes">
+        Бизнес получил стабильное и функциональное приложение, в которое за прогнозируемые сроки можно внедрять новые фичи.
+      </aside>
+    </section>
+
+    <section
+      data-title="Итоги"
+      data-logo-inverted
+    >
+      <h2>Удобство для пользователей</h2>
+
+      <aside class="notes" data-note-markdown>
+        Клиенты получили крайне удобный банкомат, вероятно, один из лучших в мире, к сожалению, конкурсов
+        пока что не проводится, и премию получать пока не у кого.
+      </aside>
+    </section>
+
+    <section
+      data-title="Итоги"
+      data-logo-inverted
+    >
+      <h2>Возможность экспериментировать с форматами</h2>
+
+      <aside class="notes" data-note-markdown>
+        Благодаря гибкости выбранных технологий, мы можем свободно экспериментировать с форматами.
+        Я уже упоминал про четыре модели банкоматов и терминала, помимо этого в скоро времени
+        добавится еще одна модель банкомата с экраном в 32 дюйма.
+      </aside>
+    </section>
+
+    <section
+      data-logo-inverted
+    >
+      <h1>Мораль</h1>
+      <aside class="notes">
+        Итак, несколько выводов, которые можно сделать из всей этой истории.
+
+        Несколько мыслей, которые я бы хотел донести.
+      </aside>
+    </section>
+
+    <section
+      data-logo-inverted
+    >
+      <h2>Думай</h2>
+      <aside class="notes">
+        Нисколько не сомневаюсь, что никого из здесь присутствующих нельзя обвинить в том,
+        что они не думают перед тем как делать задачу.
+
+        Но, к сожалению, очень часто бывает так, что разработчик, вольно или невольно,
+        ограничивает себя каким-то инструментарием.
+
+        Я хочу сказать, что крайне важно думать не только КАК сделать задачу, но
+        и ЧЕМ её делать, и чем больше задача - тем больше внимания нужно уделить именно аспекту выбора инструментов.
+
+        Нужно помнить, что неправильный выбор инструментария можно повлечь за собой
+        бессмысленную трату сотен и тысяч часов работы. Затраты, которых можно было бы избежать, сделав правильный выбор.
+      </aside>
+    </section>
+
+    <section
+      data-logo-inverted
+    >
+      <h2>Изучай</h2>
+      <aside class="notes">
+        Вторая мысль напрямую следует из первой.
+
+        Для того, чтобы иметь возможность выбрать инструмент, нужно, чтобы было из чего выбирать.
+        Не обязательно подписываться на все рассылки и все подкасты, не нужно погружаться
+        в каждый выходящий фреймворк, тем более, что только за время моего рассказа их вышло как минимум четыре.
+
+        Но крайне важно знать, иметь представление о том, что происходит.
+        Какие подходы набирают популярность, и почему. Какие подходы теряют популярность - и почему.
+        Выскажу немного боли: грустно видеть реакт-разработчиков, в глаза не видевших ангуляр,
+        грустно видеть ангуляр-разработчиков, не имеющих представления о вью, грустно, что вообще
+        первое, о чем спрашивают фронтендера - это на каком фреймворке он пишет.
+      </aside>
+    </section>
+
+    <section
+      data-logo-inverted
+    >
+      <h2>Спрашивай</h2>
+      <aside class="notes">
+        И последнее - никогда не нужно считать зазорным спросить. Невозможно знать всё.
+
+        Всегда есть кто-то, кто знает чуть больше.
+
+        И если только возникает подозрение, что задачу, которую вы делаете или
+        планируете делать, можно сделать лучше - а такие подозения должны возникать всегда,
+        нужно найти того, что имеет в этом опыт, и спросить.
+      </aside>
+    </section>
+
+    <section
+      data-logo-inverted
+    >
+      <div class="row">
+        <div style="width: 50%"><a href="https://clck.ru/DJ5CY"><img style="height: 8em" src="atmui/qrlink.svg" alt=""></a></div>
+        <div style="width: 50%">
+          <h3>Конец</h3>
+          <p style="line-height: 0.7;">
+            <small>Веб-версия доклада: <a href="https://clck.ru/DJ5CY">https://clck.ru/DJ5CY</a></small><br />
+            <small>email: <a href="mailto:dima@korolev.dk">dima@korolev.dk</a></small><br />
+            <small>github: <a href="https://github.com/dmitry-korolev">/dmitry-korolev</a></small><br />
+            <small>telegram: <a href="https://t.me/dimakorolev">@dimakorolev</a></small>
+          </p>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>
+
+<script src="lib/js/head.min.js"></script>
+<script src="lib/js/reveal.js"></script>
+
+<script>
+  // More info about config & dependencies:
+  // - https://github.com/hakimel/reveal.js#configuration
+  // - https://github.com/hakimel/reveal.js#dependencies
+  Reveal.initialize({
+    // Controls
+    controls: false,
+    controlsTutorial: false,
+
+    // Numbers
+    slideNumber: 'c/t',
+
+    // Transitions
+    transitionSpeed: 'fast',
+    transition: 'fade',
+
+    // Toggle notes
+    showNotes: document.location.search.includes('showNotes'),
+
+    // URL
+    history: true,
+    fragmentInURL: true,
+
+    // Printing
+    pdfSeparateFragments: false,
+    height: 640,
+
+    // For plugins
+    postMessage: true,
+    dependencies: [
+      {
+        src: 'node_modules/mermaid/dist/mermaid.min.js'
+      },
+      {
+        src: 'lib/plugins/markdown/marked.js',
+        condition: () => !!document.querySelector('[data-markdown]') || !!document.querySelector('[data-note-markdown]')
+      },
+      {
+        src: 'lib/plugins/markdown/markdown.js',
+        condition: () => !!document.querySelector('[data-markdown]')
+      },
+      {
+        src: 'lib/plugins/notes-markdown/index.js',
+        condition: () => !!document.querySelector('[data-note-markdown]')
+      },
+      {
+        src: 'lib/plugins/mermaid/index.js',
+        async: true
+      },
+      {
+        src: 'lib/plugins/tinkoff-header/index.js'
+      },
+      {
+        src: 'lib/plugins/notes/notes.js',
+        async: true
+      },
+      {
+        src: 'lib/plugins/dinasize/index.js',
+        async: true
+      },
+      {
+        src: 'lib/plugins/polechudes/index.js',
+        async: true,
+        callback: () => {
+          Game('никак', document.querySelector('.game'))
+        }
+      },
+      {
+        src: 'lib/plugins/prism/prism.js',
+        async: true,
+        callback: () => {
+          Array.from(document.querySelectorAll('pre code')).forEach(block => {
+            block.addEventListener('blur', () => {
+              Prism.highlightElement(block)
+            })
+          })
+        }
+      }
+    ]
+  })
+</script>
+</body>
+</html>
