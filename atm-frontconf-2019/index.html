@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-  <base href="/" />
+  <base href="../talks" />
 
   <title>Разработка UI для банкоматов</title>
 
@@ -884,7 +884,7 @@
       data-title="Выбор №7: тестирование"
       data-logo-inverted
     >
-      <div class="game"></div>
+      <div class="game" data-game-word="никак"></div>
 
       <aside class="notes" data-note-markdown>
         Ну, если совсем коротко — никак. Но не торопитесь нас шеймить. У нас есть оправдания!
@@ -1128,10 +1128,7 @@
       },
       {
         src: 'lib/plugins/polechudes/index.js',
-        async: true,
-        callback: () => {
-          Game('никак', document.querySelector('.game'))
-        }
+        async: true
       },
       {
         src: 'lib/plugins/prism/prism.js',
