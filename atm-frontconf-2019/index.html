@@ -48,7 +48,7 @@
       <h1>Зачем?</h1>
       <ul>
         <li class="fragment">Самоинкассация для SME</li>
-        <li class="fragment">Рост оборота наличности</li>
+        <li class="fragment">Снятие и пополнение без ограничений</li>
         <li class="fragment">Экономия на комиссиях</li>
         <li class="fragment">Новые каналы связи с клиентами</li>
       </ul>
@@ -176,7 +176,7 @@
       </div>
 
       <aside class="notes" data-note-markdown>
-        Нужно было выбрать наиболее универсальное решение — мы предполагали,
+        Во-первых, нам нужно было выбрать наиболее универсальное решение — мы предполагали,
         что одним банкоматом дело не ограничится, и так и вышло — сейчас у нас
         4 разных модели банкоматов и терминалов, а в скором времени добавятся еще.
       </aside>
@@ -195,6 +195,66 @@
       <aside class="notes" data-note-markdown>
         Сейчас у нас пять моделей от трех производителей. У всех разное поведение, набор периферийных устройств и каждое —
         со своим характером.
+      </aside>
+    </section>
+
+    <section
+      data-logo-inverted
+      data-background-image="atm-frontconf-2019/images/screens/start.png"
+      data-background-size="auto 100%"
+    >
+      <aside class="notes" data-note-markdown>
+        Во-вторых, мы хотели, сделать по-настоящему уникальное приложение.
+      </aside>
+    </section>
+
+    <section
+      data-logo-inverted
+      data-background-image="atm-frontconf-2019/images/screens/main.png"
+      data-background-size="auto 100%"
+    >
+      <aside class="notes" data-note-markdown>
+        С оригинальным, понятным интерфейсом.
+      </aside>
+    </section>
+
+    <section
+      data-logo-inverted
+      data-background-image="atm-frontconf-2019/images/screens/lang.png"
+      data-background-size="auto 100%"
+    >
+      <aside class="notes" data-note-markdown>
+        С возможностью быстрого внедрения любых фич, начиная от смены языка
+      </aside>
+    </section>
+
+    <section
+      data-logo-inverted
+      data-background-image="atm-frontconf-2019/images/screens/accounts.png"
+      data-background-size="auto 100%"
+    >
+      <aside class="notes" data-note-markdown>
+        и возможности выбирать аккаунт, с которым проводятся операции
+      </aside>
+    </section>
+
+    <section
+      data-logo-inverted
+      data-background-image="atm-frontconf-2019/images/screens/sms.png"
+      data-background-size="auto 100%"
+    >
+      <aside class="notes" data-note-markdown>
+        и заканчивая получением одноразовых паролей в смс
+      </aside>
+    </section>
+
+    <section
+      data-logo-inverted
+      data-background-image="atm-frontconf-2019/images/screens/qrcash.png"
+      data-background-size="auto 100%"
+    >
+      <aside class="notes" data-note-markdown>
+        и возможностью снять деньги, просто показав банкомату заранее сгенерированный qr-код
       </aside>
     </section>
 
@@ -257,7 +317,7 @@
       <div style="width: 50%; text-align: left; float: left">
         <h3>Устаревший Chromium</h3>
         <ul>
-          <li class="fragment">Невозможный дебаг</li>
+          <li class="fragment">Затрудненный дебаг</li>
           <li class="fragment">Странные баги из-за кастомизации</li>
         </ul>
       </div>
@@ -920,7 +980,6 @@
       data-title="Выбор №7: тестирование"
       data-logo-inverted
     >
-
       <img src="atm-frontconf-2019/images/insert-card.gif" style="height: 12em;" alt="">
 
       <aside class="notes" data-note-markdown>
@@ -982,6 +1041,9 @@
         Но бизнесу это тоже не очень интересно, потому что текущая скорость доставки новых
         версий на прод вполне его устраивает.
 
+        Я уже говорил ранее, что регресс занимает буквально несколько часов. Учитывая, что у нас нет
+        необходимости релизиться чаще, чем раз в две недели, это вполне всех устраивает.
+
         Если интересно, в случае необходимости процесс выкладки новой версии на все банкоматы включая
         регресс и доставку может уложиться в 1 день. Если прям с утреца начать, конечно.
       </aside>
@@ -1042,8 +1104,7 @@
 
       <aside class="notes" data-note-markdown>
         Благодаря гибкости выбранных технологий, мы можем свободно экспериментировать с форматами.
-        Я уже упоминал про четыре модели банкоматов и терминала, помимо этого в скоро времени
-        добавится еще одна модель банкомата с экраном в 32 дюйма.
+        Пять моделей банкоматов, в скором времени будет еще.
       </aside>
     </section>
 
