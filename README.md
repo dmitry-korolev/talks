@@ -1,4 +1,4 @@
-# Public talks
+# Public talks tracker
 
 | Title | Event | Date | City | Video  |
 | ------------ | ------------ | ------------ | ------------ | ------------ |
