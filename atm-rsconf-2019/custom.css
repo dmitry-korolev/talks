@@ -3,8 +3,8 @@ body:after {
     display: block;
     background: url('./images/rs-logo.svg');
     background-size: cover;
-    height: 40px;
-    width: 237px;
+    height: 30px;
+    width: 178px;
     position: absolute;
     z-index: 999;
     bottom: 8px;
@@ -13,7 +13,7 @@ body:after {
 }
 
 .index-slide .slide-number,
-body:after {
+.index-slide body:after {
     display: none!important;
 }
 
