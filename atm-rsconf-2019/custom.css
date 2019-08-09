@@ -12,7 +12,8 @@ body:after {
     filter: invert(1);
 }
 
-.index-slide .slide-number {
+.index-slide .slide-number,
+body:after {
     display: none!important;
 }
 
