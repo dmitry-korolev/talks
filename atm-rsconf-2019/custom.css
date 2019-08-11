@@ -3,8 +3,8 @@ body:after {
     display: block;
     background: url('./images/rs-logo.svg');
     background-size: cover;
-    height: 30px;
-    width: 178px;
+    height: 1.5em;
+    width: 8.85em;
     position: absolute;
     z-index: 999;
     bottom: 8px;
